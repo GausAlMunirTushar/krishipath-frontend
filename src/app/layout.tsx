@@ -13,8 +13,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "",
-  description: "",
+  title: "কৃষি পথ ",
+  description: "Krishipath",
+  keywords: ["krishipath", "krishi", "path", "কৃষি", "পথ"],
 };
 
 export default function RootLayout({

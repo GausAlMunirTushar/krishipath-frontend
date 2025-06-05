@@ -44,7 +44,7 @@ const Header = () => {
 						আমাদের সম্পর্কে
 					</Link>
 					<Link
-						href="/about"
+						href="/contact"
 						className="text-gray-600 hover:text-green-600"
 					>
 						যোগাযোগ

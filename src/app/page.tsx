@@ -28,7 +28,7 @@ const HomePage = () => {
 					))}
 				</div>
 			</div>
-			<div className="container mx-auto px-6 lg:px-8">
+			<div className="container mx-auto px-6 lg:px-8 my-12">
 				<h2 className="text-3xl font-semibold text-green-900 text-center">
 					কৃষক সাফল্য কাহিনী
 				</h2>

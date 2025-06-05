@@ -2,9 +2,11 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 
+import { Facebook, Instagram, Linkedin, Youtube, Send } from "lucide-react";
+
 const Footer: React.FC = () => {
 	return (
-		<footer className="bg-[#003D2C] text-white py-12">
+		<footer className="bg-[#003D2C] text-white pt-10 pb-8">
 			<div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12 px-4">
 				{/* Left Section */}
 				<div className="space-y-4">
@@ -23,16 +25,16 @@ const Footer: React.FC = () => {
 					</p>
 					<div className="flex space-x-4">
 						<Link href="#" className="hover:text-green-400">
-							<i className="fab fa-facebook-f"></i>
+							<Facebook size={24} /> {/* Facebook Icon */}
 						</Link>
 						<Link href="#" className="hover:text-green-400">
-							<i className="fab fa-twitter"></i>
+							<Youtube size={24} /> {/* YouTube Icon */}
 						</Link>
 						<Link href="#" className="hover:text-green-400">
-							<i className="fab fa-pinterest"></i>
+							<Instagram size={24} /> {/* Instagram Icon */}
 						</Link>
 						<Link href="#" className="hover:text-green-400">
-							<i className="fab fa-instagram"></i>
+							<Linkedin size={24} /> {/* LinkedIn Icon */}
 						</Link>
 					</div>
 				</div>
@@ -59,20 +61,6 @@ const Footer: React.FC = () => {
 							<Link href="/projects">
 								<span className="hover:text-green-400">
 									আমাদের প্রকল্প
-								</span>
-							</Link>
-						</li>
-						<li>
-							<Link href="/farmers">
-								<span className="hover:text-green-400">
-									কৃষকরা
-								</span>
-							</Link>
-						</li>
-						<li>
-							<Link href="/news">
-								<span className="hover:text-green-400">
-									সাম্প্রতিক খবর
 								</span>
 							</Link>
 						</li>
@@ -128,14 +116,14 @@ const Footer: React.FC = () => {
 					</p>
 
 					{/* Email Subscription */}
-					<div className="flex items-center space-x-2">
+					<div className="flex items-center">
 						<input
 							type="email"
 							placeholder="আপনার ইমেল ঠিকানা"
-							className="p-2 w-full rounded-md text-gray-800"
+							className="px-4 py-2 w-full rounded-s-md text-white border border-green-500 focus:outline-none focus:border-green-500"
 						/>
-						<button className="p-2 bg-green-500 text-white rounded-md hover:bg-green-400">
-							<i className="fas fa-paper-plane"></i>
+						<button className="p-2 bg-green-500 border border-green-500 text-white rounded-e-md hover:bg-green-400">
+							<Send />
 						</button>
 					</div>
 				</div>

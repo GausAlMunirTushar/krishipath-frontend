@@ -1,11 +1,9 @@
-import faqData from "@/data/faqData";
 import successStories from "@/data/successStories";
-import FAQ from "@/pages/web/faq/FAQ";
 import FarmerSuccessStory from "@/pages/web/success-story/FarmerSuccessStory";
 
-const HomePage = () => {
+const FarmerSuccessStoriesPage: React.FC = () => {
 	return (
-		<main className="max-w-7xl mx-auto  py-16 sm:py-24">
+		<div className="min-h-screen bg-gray-50 py-16 sm:py-24 lg:py-32">
 			<div className="container mx-auto px-6 lg:px-8">
 				<h2 className="text-3xl font-semibold text-green-900 text-center">
 					কৃষক সাফল্য কাহিনী
@@ -28,19 +26,8 @@ const HomePage = () => {
 					))}
 				</div>
 			</div>
-			<div className=" px-6 lg:px-8">
-				<h2 className="text-3xl font-semibold text-green-900 text-center">
-					সাধারণ জিজ্ঞাসা (FAQ)
-				</h2>
-				<p className="mt-4 text-lg text-gray-600 text-center">
-					আমাদের প্রায়শই জিজ্ঞাসিত প্রশ্নগুলি দেখুন।
-				</p>
-
-				{/* FAQ Component */}
-				<FAQ faqData={faqData} />
-			</div>
-		</main>
+		</div>
 	);
 };
 
-export default HomePage;
+export default FarmerSuccessStoriesPage;

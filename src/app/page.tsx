@@ -2,12 +2,16 @@ import faqData from "@/data/faqData";
 import productData from "@/data/productData";
 import successStories from "@/data/successStories";
 import FAQ from "@/pages/web/faq/FAQ";
+import Hero from "@/pages/web/home/Hero";
 import LiveMarketPriceFeed from "@/pages/web/live-market/LiveMarketPriceFeed";
 import FarmerSuccessStory from "@/pages/web/success-story/FarmerSuccessStory";
 
 const HomePage = () => {
 	return (
-		<main className="max-w-7xl mx-auto  py-16 sm:py-24">
+		<main className="max-w-7xl mx-auto py-8">
+			<div className="px-6 lg:px-8 mb-8">
+				<Hero />
+			</div>
 			<div className="container mx-auto px-6 lg:px-8">
 				<h2 className="text-3xl font-semibold text-green-900 text-center">
 					লাইভ মার্কেট প্রাইস ফিড

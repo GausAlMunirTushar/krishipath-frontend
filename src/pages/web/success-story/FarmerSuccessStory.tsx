@@ -18,7 +18,7 @@ const FarmerSuccessStory: React.FC<FarmerSuccessStoryProps> = ({
 			<img
 				src={image}
 				alt={`${name} Image`}
-				className="w-full h-56 object-cover"
+				className="w-full h-64 object-cover"
 			/>
 			<div className="p-6">
 				<h3 className="text-xl font-semibold text-green-900">{name}</h3>

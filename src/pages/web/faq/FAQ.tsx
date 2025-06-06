@@ -9,7 +9,7 @@ interface FAQItem {
 	answer: string;
 }
 
-const FAQ: React.FC<{ faqData: FAQItem[] }> = ({ faqData }) => {
+const FAQ: React.FC<{ faqData?: FAQItem[] }> = ({ faqData = [] }) => {
 	return (
 		<div className="space-y-4">
 			{faqData.map((item, index) => (

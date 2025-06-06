@@ -13,8 +13,7 @@ const HomePage = () => {
 					লাইভ মার্কেট প্রাইস ফিড
 				</h2>
 				<p className="mt-4 text-lg text-gray-600 text-center">
-					এখানে বিভিন্ন পণ্যের লাইভ মার্কেট প্রাইসের তুলনা দেখানো
-					হচ্ছে।
+					এখানে বিভিন্ন পণ্যের বর্তমান বাজার মূল্য দেখানো হচ্ছে।
 				</p>
 
 				<div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12">
@@ -23,7 +22,7 @@ const HomePage = () => {
 							key={index}
 							productName={product.productName}
 							productImage={product.productImage}
-							priceComparison={product.priceComparison}
+							price={product.price}
 						/>
 					))}
 				</div>

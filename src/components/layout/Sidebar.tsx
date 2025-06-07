@@ -1,4 +1,5 @@
 "use client";
+
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
@@ -13,7 +14,10 @@ import {
 	Video,
 	ClipboardList,
 	BookOpen,
+	ChevronLeft,
+	ChevronRight,
 } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 const menuItems = [
 	{ name: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
@@ -29,28 +33,52 @@ const menuItems = [
 	{ name: "Settings", href: "/settings", icon: Settings },
 ];
 
-export default function Sidebar() {
+export default function Sidebar({
+	isOpen,
+	toggleSidebar,
+}: {
+	isOpen: boolean;
+	toggleSidebar: () => void;
+}) {
 	const pathname = usePathname();
 
 	return (
-		<aside className="w-64 min-h-screen bg-white border-r hidden lg:block">
-			<div className="p-6 flex items-center gap-2 text-green-700 text-xl font-bold">
-				<img src="/logo.svg" alt="Logo" className="h-6" /> কৃষি পথ
+		<aside
+			className={cn(
+				"bg-white border-r border-gray-300 transition-all duration-300 hidden lg:flex flex-col",
+				isOpen ? "w-56" : "w-16"
+			)}
+		>
+			{/* Logo and Toggle */}
+			<div className="flex items-center justify-between px-4 py-4 border-b border-gray-300">
+				{isOpen ? (
+					<img src="/images/logo.svg" alt="Logo" className="h-6" />
+				) : (
+					<img src="/images/icon.svg" alt="Logo" className="h-6" />
+				)}
+				<button className="" onClick={toggleSidebar}>
+					{isOpen ? (
+						<ChevronLeft className="w-5 h-5 text-gray-500" />
+					) : (
+						<ChevronRight className="w-5 h-5 text-gray-500" />
+					)}
+				</button>
 			</div>
+
+			{/* Navigation */}
 			<nav className="mt-4 space-y-2">
 				{menuItems.map(({ name, href, icon: Icon }) => (
 					<Link
 						key={name}
 						href={href}
-						className={`flex items-center gap-3 px-6 py-2 rounded-md transition-all
-              ${
-					pathname === href
-						? "bg-green-600 text-white"
-						: "text-gray-700 hover:bg-gray-100"
-				}`}
+						className={`flex items-center gap-3 px-4 py-2 rounded-md transition-all text-sm ${
+							pathname === href
+								? "bg-green-600 text-white"
+								: "text-gray-700 hover:bg-gray-100"
+						}`}
 					>
 						<Icon className="w-5 h-5" />
-						{name}
+						{isOpen && name}
 					</Link>
 				))}
 			</nav>

@@ -1,10 +1,11 @@
-import Sidebar from "@/components/layout/Sidebar";
+import DashboardContent from "@/pages/dashboard/Dashboard";
 
 export default function DashboardPage() {
 	return (
 		<div className="flex">
-			<Sidebar />
-			<main className="flex-1 p-6">{/* <DashboardContent /> */}</main>
+			<main>
+				<DashboardContent />
+			</main>
 		</div>
 	);
 }

@@ -34,7 +34,7 @@ const LoginPage: React.FC = () => {
 	};
 
 	return (
-		<div className="min-h-screen bg-gray-50 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+		<div className=" bg-gray-50 flex items-center justify-center py-8 sm:py-12 px-4 sm:px-6 lg:px-8">
 			<div className="max-w-md w-full space-y-8">
 				<div>
 					<h2 className="text-center text-3xl font-extrabold text-green-900">
@@ -47,7 +47,7 @@ const LoginPage: React.FC = () => {
 
 				{/* Login Form */}
 				<form className="mt-8 space-y-6" onSubmit={handleSubmit}>
-					<div className="rounded-md shadow-sm -space-y-px">
+					<div className="rounded-md m -space-y-px">
 						{/* Email Input */}
 						<div>
 							<label htmlFor="email" className="sr-only">
@@ -60,7 +60,7 @@ const LoginPage: React.FC = () => {
 								required
 								value={formData.email}
 								onChange={handleInputChange}
-								className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-green-500 focus:border-green-500 focus:z-10 sm:text-sm"
+								className="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-green-500 focus:border-green-500 focus:z-10 sm:text-sm"
 								placeholder="ইমেল"
 							/>
 						</div>
@@ -76,7 +76,7 @@ const LoginPage: React.FC = () => {
 								required
 								value={formData.password}
 								onChange={handleInputChange}
-								className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-green-500 focus:border-green-500 focus:z-10 sm:text-sm"
+								className="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-green-500 focus:border-green-500 focus:z-10 sm:text-sm"
 								placeholder="পাসওয়ার্ড"
 							/>
 						</div>

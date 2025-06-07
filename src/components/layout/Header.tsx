@@ -56,9 +56,12 @@ const Header = () => {
 					{/* <button className="py-2 cursor-pointer text-xs sm:text-sm  px-2 sm:px-4 bg-red-500 text-white rounded-md hover:bg-red-600">
 						সাপোর্ট করুন
 					</button> */}
-					<button className="py-2 cursor-pointer  text-xs sm:text-sm  px-2 sm:px-4 bg-green-100 text-green-700 rounded-md hover:bg-green-200">
+					<Link
+						href="/login"
+						className="py-2 cursor-pointer  text-xs sm:text-sm  px-2 sm:px-4 bg-green-100 text-green-700 rounded-md hover:bg-green-200"
+					>
 						লগইন
-					</button>
+					</Link>
 				</div>
 			</div>
 		</header>

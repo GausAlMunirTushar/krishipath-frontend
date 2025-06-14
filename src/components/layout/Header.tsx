@@ -4,7 +4,7 @@ import Image from "next/image";
 
 const Header = () => {
 	return (
-		<header className="bg-white shadow-md">
+		<header className="bg-white shadow-md sticky top-0 z-50">
 			<div className="max-w-screen-xl mx-auto px-4 py-2 flex justify-between items-center">
 				{/* Logo and Brand Name */}
 				<Link href="/" className="flex items-center">

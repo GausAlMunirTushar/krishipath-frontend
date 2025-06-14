@@ -29,7 +29,7 @@ const Header = () => {
 						href="/products"
 						className="text-gray-600 hover:text-green-600"
 					>
-						আমাদের প্রকল্প
+						কৃষি বাজার
 					</Link>
 					<Link
 						href="/services"

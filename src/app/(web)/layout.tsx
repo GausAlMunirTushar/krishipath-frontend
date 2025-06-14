@@ -5,7 +5,7 @@ import MobileMenu from "@/components/layout/MobileMenu";
 export default function WebLayout({ children }: { children: React.ReactNode }) {
 	return (
 		<html lang="en">
-			<body className="">
+			<body>
 				<Header />
 				{children}
 				<MobileMenu />

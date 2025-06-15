@@ -1,17 +1,17 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 import React, { useState } from "react";
+import { submitContactForm } from "@/services/contactServices";
 
 const Contact: React.FC = () => {
-	// State for form submission
 	const [formData, setFormData] = useState({
 		name: "",
 		email: "",
 		message: "",
 	});
-
 	const [status, setStatus] = useState<string | null>(null);
+	const [loading, setLoading] = useState(false);
 
-	// Handle form input change
 	const handleInputChange = (
 		e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
 	) => {
@@ -22,17 +22,20 @@ const Contact: React.FC = () => {
 		});
 	};
 
-	// Handle form submission
-	const handleSubmit = (e: React.FormEvent) => {
+	const handleSubmit = async (e: React.FormEvent) => {
 		e.preventDefault();
-		// Simulating form submission success
-		setStatus("Your message has been sent successfully!");
-		// Reset form data
-		setFormData({
-			name: "",
-			email: "",
-			message: "",
-		});
+		setLoading(true);
+		setStatus(null);
+
+		try {
+			await submitContactForm(formData);
+			setStatus("আপনার বার্তাটি সফলভাবে পাঠানো হয়েছে!");
+			setFormData({ name: "", email: "", message: "" });
+		} catch (error: any) {
+			setStatus(error.message || "বার্তা পাঠাতে ব্যর্থ হয়েছে।");
+		} finally {
+			setLoading(false);
+		}
 	};
 
 	return (
@@ -45,11 +48,10 @@ const Contact: React.FC = () => {
 					</h2>
 					<p className="mt-4 text-lg text-gray-600">
 						আপনার যেকোনো প্রশ্ন, পরামর্শ বা মন্তব্য আমাদের সাথে
-						শেয়ার করুন। আমরা আপনাকে সহায়তা করতে প্রস্তুত।
+						শেয়ার করুন।
 					</p>
 				</div>
 
-				{/* Contact Form Section */}
 				<div className="lg:flex lg:space-x-12">
 					{/* Contact Form */}
 					<div className="lg:w-1/2 bg-white p-8 rounded-lg shadow-lg">
@@ -119,9 +121,10 @@ const Contact: React.FC = () => {
 
 							<button
 								type="submit"
-								className="w-full bg-green-600 text-white p-3 rounded-md hover:bg-green-500 focus:ring-2 focus:ring-green-500"
+								disabled={loading}
+								className="w-full bg-green-600 text-white p-3 rounded-md hover:bg-green-500 focus:ring-2 focus:ring-green-500 disabled:opacity-50"
 							>
-								পাঠান
+								{loading ? "পাঠানো হচ্ছে..." : "পাঠান"}
 							</button>
 
 							{status && (
@@ -144,7 +147,7 @@ const Contact: React.FC = () => {
 							</p>
 							<p>
 								<strong>ঠিকানা:</strong> বালিয়াডাঙ্গী সদর,
-								ঠাকুরগাঁও, রংপুর, বাংলাদেশ
+								ঠাকুরগাঁও, বাংলাদেশ
 							</p>
 						</div>
 

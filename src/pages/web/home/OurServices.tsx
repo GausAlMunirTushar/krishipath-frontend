@@ -1,12 +1,13 @@
 "use client";
 
 import { ShoppingCart, CloudRain, LineChart, Smile } from "lucide-react";
+import Link from "next/link";
 
 const services = [
-	{ icon: ShoppingCart, title: "কৃষি বাজার" },
-	{ icon: CloudRain, title: "লাইভ আবহাওয়া" },
-	{ icon: LineChart, title: "লাইভ বাজারদর" },
-	{ icon: Smile, title: "কর্মসংস্থান সৃষ্টি" },
+	{ icon: ShoppingCart, title: "কৃষি বাজার", href: "/products" },
+	{ icon: CloudRain, title: "লাইভ আবহাওয়া", href: "/weather" },
+	{ icon: LineChart, title: "লাইভ বাজারদর", href: "/live-market" },
+	{ icon: Smile, title: "কর্মসংস্থান সৃষ্টি", href: "/apply-agent" },
 ];
 
 const OurServices = () => {
@@ -22,9 +23,12 @@ const OurServices = () => {
 						className="bg-white p-6 rounded-xl shadow hover:shadow-lg transition-all duration-300 border border-green-100"
 					>
 						<service.icon className="w-10 h-10 mx-auto text-green-600 mb-4" />
-						<h3 className="text-lg font-semibold text-gray-800">
+						<Link
+							href={service.href}
+							className="text-lg font-semibold text-gray-800"
+						>
 							{service.title}
-						</h3>
+						</Link>
 					</div>
 				))}
 			</div>

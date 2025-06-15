@@ -1,0 +1,35 @@
+"use client";
+
+import { ShoppingCart, CloudRain, LineChart, Smile } from "lucide-react";
+
+const services = [
+	{ icon: ShoppingCart, title: "কৃষি বাজার" },
+	{ icon: CloudRain, title: "লাইভ আবহাওয়া" },
+	{ icon: LineChart, title: "লাইভ বাজারদর" },
+	{ icon: Smile, title: "কর্মসংস্থান সৃষ্টি" },
+];
+
+const OurServices = () => {
+	return (
+		<section className="py-16 bg-[#f9fff8] text-center">
+			<h2 className="text-3xl md:text-4xl font-bold text-green-800 mb-8">
+				আমাদের সেবা
+			</h2>
+			<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 max-w-6xl mx-auto px-4">
+				{services.map((service, index) => (
+					<div
+						key={index}
+						className="bg-white p-6 rounded-xl shadow hover:shadow-lg transition-all duration-300 border border-green-100"
+					>
+						<service.icon className="w-10 h-10 mx-auto text-green-600 mb-4" />
+						<h3 className="text-lg font-semibold text-gray-800">
+							{service.title}
+						</h3>
+					</div>
+				))}
+			</div>
+		</section>
+	);
+};
+
+export default OurServices;

@@ -3,7 +3,9 @@ import productData from "@/data/productData";
 import successStories from "@/data/successStories";
 import FAQ from "@/pages/web/faq/FAQ";
 import Hero from "@/pages/web/home/Hero";
+import OurServices from "@/pages/web/home/OurServices";
 import Weather from "@/pages/web/home/Weather";
+import WhyKrishipath from "@/pages/web/home/WhyKrishipath";
 import LiveMarketPriceFeed from "@/pages/web/live-market/LiveMarketPriceFeed";
 import FarmerSuccessStory from "@/pages/web/success-story/FarmerSuccessStory";
 
@@ -13,7 +15,12 @@ const HomePage = () => {
 			<div className="px-6 lg:px-8 mb-8">
 				<Hero />
 			</div>
-
+			<div>
+				<OurServices />
+			</div>
+			<div>
+				<WhyKrishipath />
+			</div>
 			<div className="container mx-auto px-6 lg:px-8 my-12">
 				<h2 className="text-3xl font-semibold text-green-900 text-center mb-4">
 					লাইভ আবহাওয়া

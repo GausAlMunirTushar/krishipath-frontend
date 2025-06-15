@@ -17,3 +17,18 @@ export const submitContactForm = async (data: {
 		);
 	}
 };
+
+export const getAllContacts = async () => {
+	const res = await axios.get(`${API_URL}/contacts`);
+	return res.data;
+};
+
+export const deleteContact = async (id: string) => {
+	const res = await axios.delete(`${API_URL}/contacts/${id}`);
+	return res.data;
+};
+
+export const updateContact = async (id: string, data: any) => {
+	const res = await axios.put(`${API_URL}/contacts/${id}`, data);
+	return res.data;
+};

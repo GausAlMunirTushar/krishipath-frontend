@@ -1,55 +1,42 @@
+"use client";
+
 import React from "react";
-import { Home, ShoppingCart, Info, Phone, ListFilterPlus } from "lucide-react"; // Import Lucide icons
+import { Home, ShoppingCart, Info, Phone, ListFilterPlus } from "lucide-react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 const MobileMenu: React.FC = () => {
+	const pathname = usePathname();
+
+	const links = [
+		{ href: "/", label: "হোম", icon: Home },
+		{ href: "/products", label: "কৃষি বাজার", icon: ShoppingCart },
+		{ href: "/services", label: "সেবা", icon: ListFilterPlus },
+		{ href: "/about", label: "আমাদের সম্পর্কে", icon: Info },
+		{ href: "/contact", label: "যোগাযোগ", icon: Phone },
+	];
+
 	return (
-		<div className="fixed bottom-0 left-0 right-0 bg-white shadow-lg md:hidden">
+		<div className="fixed bottom-0 left-0 right-0 bg-white shadow-lg md:hidden z-50">
 			<div className="flex justify-around items-center py-3">
-				{/* Home Icon with Text */}
-				<Link
-					href="/"
-					className="flex flex-col items-center text-gray-600 hover:text-green-600"
-				>
-					<Home size={24} />
-					<span className="text-xs mt-1">হোম</span>
-				</Link>
+				{links.map(({ href, label, icon: Icon }) => {
+					const isActive = pathname === href;
 
-				{/* Shopping Cart Icon with Text */}
-				<Link
-					href="/products"
-					className="flex flex-col items-center text-gray-600 hover:text-green-600"
-				>
-					<ShoppingCart size={24} />
-					<span className="text-xs mt-1">পণ্যসমূহ</span>
-				</Link>
-
-				{/* Service Icon with Text */}
-				<Link
-					href="/services"
-					className="flex flex-col items-center text-gray-600 hover:text-green-600"
-				>
-					<ListFilterPlus size={24} />
-					<span className="text-xs mt-1">সেবা</span>
-				</Link>
-
-				{/* Info Icon with Text */}
-				<Link
-					href="/about"
-					className="flex flex-col items-center text-gray-600 hover:text-green-600"
-				>
-					<Info size={24} />
-					<span className="text-xs mt-1">আমাদের সম্পর্কে</span>
-				</Link>
-
-				{/* Phone Icon with Text */}
-				<Link
-					href="/contact"
-					className="flex flex-col items-center text-gray-600 hover:text-green-600"
-				>
-					<Phone size={24} />
-					<span className="text-xs mt-1">যোগাযোগ</span>
-				</Link>
+					return (
+						<Link
+							key={href}
+							href={href}
+							className={`flex flex-col items-center text-xs transition-all ${
+								isActive
+									? "text-green-600 font-semibold"
+									: "text-gray-600"
+							} hover:text-green-600`}
+						>
+							<Icon size={24} />
+							<span className="mt-1">{label}</span>
+						</Link>
+					);
+				})}
 			</div>
 		</div>
 	);

@@ -1,6 +1,6 @@
 const TermsAndConditionsPage = () => {
 	return (
-		<div className="bg-gray-50 py-16 sm:py-24 lg:py-32">
+		<div className="bg-gray-50 py-10 sm:py-20">
 			<div className="max-w-7xl mx-auto px-6 lg:px-8">
 				{/* Header Section */}
 				<div className="text-center mb-12">

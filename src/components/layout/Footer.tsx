@@ -53,26 +53,26 @@ const Footer: React.FC = () => {
 
 				{/* Explore Section */}
 				<div className="space-y-2">
-					<h4 className="font-semibold text-lg">এক্সপ্লোর</h4>
+					<h4 className="font-semibold text-lg">আরও কিছু</h4>
 					<ul className="space-y-2 text-gray-400">
 						<li>
-							<Link href="/about">
+							<Link href="/live-market">
 								<span className="hover:text-green-400">
-									আমাদের সম্পর্কে
+									সরাসরি বাজার দর
 								</span>
 							</Link>
 						</li>
 						<li>
-							<Link href="/services">
+							<Link href="/weather">
 								<span className="hover:text-green-400">
-									সেবাসমূহ
+									আবহাওয়া সেবা
 								</span>
 							</Link>
 						</li>
 						<li>
-							<Link href="/projects">
+							<Link href="/apply-agent">
 								<span className="hover:text-green-400">
-									আমাদের প্রকল্প
+									আমাদের সাথে যুক্ত হন
 								</span>
 							</Link>
 						</li>

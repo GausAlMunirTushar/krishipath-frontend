@@ -34,7 +34,7 @@ const AboutPage: React.FC = () => {
 				<div className="grid grid-cols-1 md:grid-cols-2 gap-12">
 					<div className="flex justify-center">
 						<Image
-							src="/images/our-mission.jpg"
+							src="/images/our-mission.webp"
 							alt="Our Mission"
 							width={500}
 							height={350}
@@ -123,11 +123,11 @@ const AboutPage: React.FC = () => {
 					<div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12">
 						<div className="text-center">
 							<Image
-								src="/images/rifat.jpg"
+								src="/images/rifat.png"
 								alt="মোঃ রিফাত আল মাহামুদ"
 								width={200}
 								height={200}
-								className="rounded-full mx-auto mb-4"
+								className="rounded-md h-48 w-48 mx-auto mb-4"
 							/>
 							<h4 className="text-lg font-semibold text-green-900">
 								মোঃ রিফাত আল মাহামুদ
@@ -144,11 +144,11 @@ const AboutPage: React.FC = () => {
 						</div>
 						<div className="text-center">
 							<Image
-								src="/images/mahin.jpg"
+								src="/images/mahin.png"
 								alt="মোঃ মুনতাছির মাহিন"
 								width={200}
 								height={200}
-								className="rounded-full mx-auto mb-4"
+								className="rounded-md h-48 w-48 mx-auto mb-4"
 							/>
 							<h4 className="text-lg font-semibold text-green-900">
 								মোঃ মুনতাছির মাহিন
@@ -160,6 +160,24 @@ const AboutPage: React.FC = () => {
 							<p className="text-sm text-gray-500">01897950236</p>
 							<p className="text-sm mt-2">
 								ডেটা সংগ্রহ ও বিশ্লেষণ, ফিচার পরিকল্পনা
+							</p>
+						</div>
+						<div className="text-center">
+							<Image
+								src="/images/tushar.jpg"
+								alt="মো: গাউস আল মুনির তুষার"
+								width={200}
+								height={200}
+								className="rounded-md object-cover h-48 w-48 mx-auto mb-4"
+							/>
+							<h4 className="text-lg font-semibold text-green-900">
+								মো: গাউস আল মুনির তুষার
+							</h4>
+							<p className="text-gray-600">প্রযুক্তি উপদেষ্টা</p>
+							<p className="text-sm text-gray-500">কৃষিপথ</p>
+							<p className="text-sm text-gray-500">01726814131</p>
+							<p className="text-sm mt-2">
+								সফটওয়্যার ডেভেলপমেন্ট, প্রযুক্তি পরিকল্পনা
 							</p>
 						</div>
 					</div>

@@ -3,34 +3,30 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
-	CalendarDays,
-	Download,
-	FileText,
-	LayoutDashboard,
-	MessageSquare,
-	Notebook,
-	Settings,
-	Users,
-	Video,
-	ClipboardList,
-	BookOpen,
 	ChevronLeft,
 	ChevronRight,
+	LayoutDashboard,
+	Box,
+	Briefcase,
+	ShoppingCart,
+	UserCheck,
+	BarChart,
+	BookOpen,
+	PhoneCall,
+	Settings,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const menuItems = [
-	{ name: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
-	{ name: "Assignments", href: "/assignments", icon: ClipboardList },
-	{ name: "Schedule", href: "/schedule", icon: CalendarDays },
-	{ name: "Recordings", href: "/recordings", icon: Video },
-	{ name: "Discussions", href: "/discussions", icon: MessageSquare },
-	{ name: "Resources", href: "/resources", icon: FileText },
-	{ name: "Notes", href: "/notes", icon: Notebook },
-	{ name: "Downloads", href: "/downloads", icon: Download },
-	{ name: "Classes", href: "/classes", icon: Users },
-	{ name: "Courses", href: "/courses", icon: BookOpen },
-	{ name: "Settings", href: "/settings", icon: Settings },
+	{ name: "Dashboard", href: "/admin/dashboard", icon: LayoutDashboard },
+	{ name: "Products", href: "/admin/products", icon: Box },
+	{ name: "Services", href: "/admin/services", icon: Briefcase },
+	{ name: "Order", href: "/admin/order", icon: ShoppingCart },
+	{ name: "Agent", href: "/admin/agent", icon: UserCheck },
+	{ name: "Live Market", href: "/admin/live-market", icon: BarChart },
+	{ name: "Farmer Stories", href: "/admin/farmer-stories", icon: BookOpen },
+	{ name: "Contact", href: "/admin/contact", icon: PhoneCall },
+	{ name: "Settings", href: "/admin/settings", icon: Settings },
 ];
 
 export default function Sidebar({
@@ -66,7 +62,7 @@ export default function Sidebar({
 			</div>
 
 			{/* Navigation */}
-			<nav className="mt-4 space-y-2">
+			<nav className="mt-4 space-y-2 px-2">
 				{menuItems.map(({ name, href, icon: Icon }) => (
 					<Link
 						key={name}

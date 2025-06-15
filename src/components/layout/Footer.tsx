@@ -97,19 +97,23 @@ const Footer: React.FC = () => {
 								</span>
 							</Link>
 							<span className="text-sm text-gray-500">
-								জুলাই ৫, ২০২২
+								- জুলাই ৫, ২০২৫
 							</span>
 						</li>
-						<li>
-							<Link href="/news/2">
-								<span className="hover:text-green-400">
-									চাষাবাদের ভবিষ্যত, স্মার্ট সেচ সমাধান
-								</span>
-							</Link>
-							<span className="text-sm text-gray-500">
-								জুলাই ৫, ২০২২
-							</span>
-						</li>
+						<p className="text-xs text-gray-500">
+							নিয়মিত খবর পেতে আপনার ইমেইল ঠিকানা দিন
+						</p>
+						{/* Email Subscription */}
+						<div className="flex items-center">
+							<input
+								type="email"
+								placeholder="আপনার ইমেল ঠিকানা"
+								className="px-4 py-1 w-full rounded-s-md text-white border border-green-500 focus:outline-none focus:border-green-500"
+							/>
+							<button className="p-1 bg-green-500 border border-green-500 text-white rounded-e-md hover:bg-green-400">
+								<Send className="w-6 h-6 p-1" />
+							</button>
+						</div>
 					</ul>
 				</div>
 
@@ -130,18 +134,6 @@ const Footer: React.FC = () => {
 						<i className="fas fa-map-marker-alt"></i> বালিয়াডাঙ্গী
 						সদর, ঠাকুরগাঁও, রংপুর, বাংলাদেশ
 					</p>
-
-					{/* Email Subscription */}
-					<div className="flex items-center">
-						<input
-							type="email"
-							placeholder="আপনার ইমেল ঠিকানা"
-							className="px-4 py-2 w-full rounded-s-md text-white border border-green-500 focus:outline-none focus:border-green-500"
-						/>
-						<button className="p-2 bg-green-500 border border-green-500 text-white rounded-e-md hover:bg-green-400">
-							<Send />
-						</button>
-					</div>
 				</div>
 			</div>
 

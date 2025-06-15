@@ -24,16 +24,28 @@ const Footer: React.FC = () => {
 						বেশিরভাগই ভুক্তভোগী।
 					</p>
 					<div className="flex space-x-4">
-						<Link href="#" className="hover:text-green-400">
+						<Link
+							href="https://facebook.com/krishipath"
+							className="hover:text-green-400"
+						>
 							<Facebook size={24} /> {/* Facebook Icon */}
 						</Link>
-						<Link href="#" className="hover:text-green-400">
+						<Link
+							href="https://youtube.com/@krishipathbd"
+							className="hover:text-green-400"
+						>
 							<Youtube size={24} /> {/* YouTube Icon */}
 						</Link>
-						<Link href="#" className="hover:text-green-400">
+						<Link
+							href="https://instagram.com/krishipath"
+							className="hover:text-green-400"
+						>
 							<Instagram size={24} /> {/* Instagram Icon */}
 						</Link>
-						<Link href="#" className="hover:text-green-400">
+						<Link
+							href="https://linkedin.com/company/krishipath"
+							className="hover:text-green-400"
+						>
 							<Linkedin size={24} /> {/* LinkedIn Icon */}
 						</Link>
 					</div>
@@ -102,17 +114,21 @@ const Footer: React.FC = () => {
 				</div>
 
 				{/* Contact Section */}
-				<div className="space-y-4">
+				<div className="space-y-2">
 					<h4 className="font-semibold text-lg">যোগাযোগ</h4>
 					<p className="text-gray-400">
-						<i className="fas fa-phone-alt"></i> ৬৬৬ ৮৮৮ ০০০০
+						<i className="fas fa-phone-alt"></i>{" "}
+						<Link href="tel:1234567890">+8801796015069</Link>
 					</p>
 					<p className="text-gray-400">
-						<i className="fas fa-envelope"></i> needhelp@company.com
+						<i className="fas fa-envelope"></i>{" "}
+						<Link href="mailto:krishipathbd@gmail.com">
+							krishipathbd@gmail.com
+						</Link>
 					</p>
 					<p className="text-gray-400">
-						<i className="fas fa-map-marker-alt"></i> ৮০ ব্রুকলিন
-						গোল্ডেন স্ট্রীট লাইন, নিউইয়র্ক, USA
+						<i className="fas fa-map-marker-alt"></i> বালিয়াডাঙ্গী
+						সদর, ঠাকুরগাঁও, রংপুর, বাংলাদেশ
 					</p>
 
 					{/* Email Subscription */}
@@ -132,7 +148,7 @@ const Footer: React.FC = () => {
 			{/* Footer Bottom */}
 			<div className="mt-8 text-center text-gray-400 text-sm">
 				<p>
-					© সমস্ত কপিরাইট ২০২৪ কৃষি পথ |{" "}
+					© সমস্ত কপিরাইট {new Date().getFullYear()} কৃষি পথ |{" "}
 					<Link
 						href="/terms-and-conditions"
 						className="hover:text-green-400"

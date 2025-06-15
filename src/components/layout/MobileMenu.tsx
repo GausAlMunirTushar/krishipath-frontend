@@ -4,7 +4,7 @@ import Link from "next/link";
 
 const MobileMenu: React.FC = () => {
 	return (
-		<div className="fixed bottom-10 left-0 right-0 bg-white shadow-lg md:hidden">
+		<div className="fixed bottom-0 left-0 right-0 bg-white shadow-lg md:hidden">
 			<div className="flex justify-around items-center py-3">
 				{/* Home Icon with Text */}
 				<Link

@@ -8,10 +8,10 @@ import Hero from "@/pages/web/home/Hero";
 import OurServices from "@/pages/web/home/OurServices";
 import Weather from "@/pages/web/home/Weather";
 import WhyKrishipath from "@/pages/web/home/WhyKrishipath";
-import LiveMarketPriceFeed from "@/pages/web/live-market/LiveMarketPriceFeed";
 import FarmerSuccessStory from "@/pages/web/success-story/FarmerSuccessStory";
 import apiClient from "@/configs/apiConfig";
 import Link from "next/link";
+import ProductCard from "@/pages/web/products/ProductCard";
 
 interface FAQItem {
 	_id?: string;
@@ -65,12 +65,7 @@ const HomePage = () => {
 
 				<div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12">
 					{productData.map((product, index) => (
-						<LiveMarketPriceFeed
-							key={index}
-							productName={product.productName}
-							productImage={product.productImage}
-							price={product.price}
-						/>
+						<ProductCard key={index} product={product} />
 					))}
 				</div>
 			</div>

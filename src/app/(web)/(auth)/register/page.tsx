@@ -1,161 +1,227 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
+
+interface Division {
+	id: string;
+	bn_name: string;
+}
+interface District {
+	id: string;
+	division_id: string;
+	bn_name: string;
+}
+interface Upazila {
+	id: string;
+	district_id: string;
+	bn_name: string;
+}
 
 const RegisterPage: React.FC = () => {
 	const [formData, setFormData] = useState({
 		name: "",
 		email: "",
+		phone: "",
+		userType: "",
+		division: "",
+		district: "",
+		upazila: "",
 		password: "",
-		confirmPassword: "",
 	});
+
 	const [error, setError] = useState<string | null>(null);
 
-	// Handle input changes
-	const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+	// Location data
+	const [divisions, setDivisions] = useState<Division[]>([]);
+	const [districts, setDistricts] = useState<District[]>([]);
+	const [upazilas, setUpazilas] = useState<Upazila[]>([]);
+
+	const [filteredDistricts, setFilteredDistricts] = useState<District[]>([]);
+	const [filteredUpazilas, setFilteredUpazilas] = useState<Upazila[]>([]);
+
+	useEffect(() => {
+		// Load all location data
+		const fetchData = async () => {
+			const [divRes, distRes, upaRes] = await Promise.all([
+				fetch("/data/bd-divisions.json"),
+				fetch("/data/bd-districts.json"),
+				fetch("/data/bd-upazilas.json"),
+			]);
+
+			const [divData, distData, upaData] = await Promise.all([
+				divRes.json(),
+				distRes.json(),
+				upaRes.json(),
+			]);
+
+			setDivisions(divData.divisions);
+			setDistricts(distData.districts);
+			setUpazilas(upaData.upazilas);
+		};
+
+		fetchData();
+	}, []);
+
+	useEffect(() => {
+		setFilteredDistricts(
+			districts.filter((d) => d.division_id === formData.division)
+		);
+		setFormData((prev) => ({ ...prev, district: "", upazila: "" }));
+	}, [formData.division, districts]);
+
+	useEffect(() => {
+		setFilteredUpazilas(
+			upazilas.filter((u) => u.district_id === formData.district)
+		);
+		setFormData((prev) => ({ ...prev, upazila: "" }));
+	}, [formData.district, upazilas]);
+
+	const handleInputChange = (
+		e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+	) => {
 		const { name, value } = e.target;
-		setFormData({
-			...formData,
-			[name]: value,
-		});
+		setFormData((prev) => ({ ...prev, [name]: value }));
 	};
 
-	// Handle form submission
 	const handleSubmit = (e: React.FormEvent) => {
 		e.preventDefault();
 
-		// Basic validation
-		if (formData.password !== formData.confirmPassword) {
-			setError("পাসওয়ার্ড এবং কনফার্ম পাসওয়ার্ড মেলেনি।");
+		// Add more validation if needed
+		if (!formData.password || formData.password.length < 6) {
+			setError("পাসওয়ার্ড কমপক্ষে ৬ অক্ষরের হতে হবে।");
 			return;
 		}
 
-		// Simulate registration (add your logic here)
-		alert("আপনার নিবন্ধন সফল হয়েছে!");
-
-		// Reset form data after successful submission
-		setFormData({
-			name: "",
-			email: "",
-			password: "",
-			confirmPassword: "",
-		});
+		setError(null);
+		alert("নিবন্ধন সফল হয়েছে!");
 	};
 
 	return (
-		<div className=" bg-gray-50 flex items-center justify-center py-8 sm:py-12 px-4 sm:px-6 lg:px-8">
-			<div className="max-w-md w-full space-y-8">
-				<div>
-					<h2 className="text-center text-3xl font-extrabold text-green-900">
-						নিবন্ধন করুন
-					</h2>
-					<p className="mt-2 text-center text-lg text-gray-600">
-						আপনার নতুন অ্যাকাউন্ট তৈরি করতে নিচে তথ্য দিন।
-					</p>
-				</div>
+		<div className="bg-gray-50 flex justify-center py-10 px-4">
+			<form
+				onSubmit={handleSubmit}
+				className="w-full max-w-md bg-white p-6 rounded-md shadow-md space-y-4"
+			>
+				<h2 className="text-2xl font-bold text-green-700 text-center">
+					নিবন্ধন করুন
+				</h2>
 
-				{/* Register Form */}
-				<form className="mt-8 space-y-6" onSubmit={handleSubmit}>
-					<div className="rounded-md  -space-y-px">
-						{/* Name Input */}
-						<div>
-							<label htmlFor="name" className="sr-only">
-								নাম
-							</label>
-							<input
-								id="name"
-								name="name"
-								type="text"
-								required
-								value={formData.name}
-								onChange={handleInputChange}
-								className="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-green-500 focus:border-green-500 focus:z-10 sm:text-sm"
-								placeholder="নাম"
-							/>
-						</div>
+				<input
+					name="name"
+					type="text"
+					placeholder="নাম"
+					required
+					value={formData.name}
+					onChange={handleInputChange}
+					className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
+				/>
 
-						{/* Email Input */}
-						<div className="mt-4">
-							<label htmlFor="email" className="sr-only">
-								ইমেল
-							</label>
-							<input
-								id="email"
-								name="email"
-								type="email"
-								required
-								value={formData.email}
-								onChange={handleInputChange}
-								className="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-green-500 focus:border-green-500 focus:z-10 sm:text-sm"
-								placeholder="ইমেল"
-							/>
-						</div>
+				<input
+					name="email"
+					type="email"
+					placeholder="ইমেইল (ঐচ্ছিক)"
+					value={formData.email}
+					onChange={handleInputChange}
+					className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
+				/>
 
-						{/* Password Input */}
-						<div className="mt-4">
-							<label htmlFor="password" className="sr-only">
-								পাসওয়ার্ড
-							</label>
-							<input
-								id="password"
-								name="password"
-								type="password"
-								required
-								value={formData.password}
-								onChange={handleInputChange}
-								className="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-green-500 focus:border-green-500 focus:z-10 sm:text-sm"
-								placeholder="পাসওয়ার্ড"
-							/>
-						</div>
+				<input
+					name="phone"
+					type="tel"
+					placeholder="ফোন নম্বর"
+					required
+					value={formData.phone}
+					onChange={handleInputChange}
+					className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
+				/>
 
-						{/* Confirm Password Input */}
-						<div className="mt-4">
-							<label
-								htmlFor="confirmPassword"
-								className="sr-only"
-							>
-								পাসওয়ার্ড নিশ্চিত করুন
-							</label>
-							<input
-								id="confirmPassword"
-								name="confirmPassword"
-								type="password"
-								required
-								value={formData.confirmPassword}
-								onChange={handleInputChange}
-								className="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-green-500 focus:border-green-500 focus:z-10 sm:text-sm"
-								placeholder="পাসওয়ার্ড নিশ্চিত করুন"
-							/>
-						</div>
-					</div>
+				<select
+					name="userType"
+					required
+					value={formData.userType}
+					onChange={handleInputChange}
+					className="w-full px-4 py-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-2 focus:ring-green-500"
+				>
+					<option value="">ইউজার টাইপ বেছে নিন</option>
+					<option value="farmer">কৃষক</option>
+					<option value="business">ব্যবসায়ী</option>
+					<option value="general">সাধারণ</option>
+					<option value="agent">এজেন্ট</option>
+				</select>
 
-					{/* Error Message */}
-					{error && (
-						<p className="text-red-500 text-sm mt-2">{error}</p>
-					)}
+				<select
+					name="division"
+					required
+					value={formData.division}
+					onChange={handleInputChange}
+					className="w-full px-4 py-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-2 focus:ring-green-500"
+				>
+					<option value="">বিভাগ বেছে নিন</option>
+					{divisions.map((d) => (
+						<option key={d.id} value={d.id}>
+							{d.bn_name}
+						</option>
+					))}
+				</select>
 
-					{/* Submit Button */}
-					<div>
-						<button
-							type="submit"
-							className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
-						>
-							নিবন্ধন করুন
-						</button>
-					</div>
+				<select
+					name="district"
+					required
+					value={formData.district}
+					onChange={handleInputChange}
+					className="w-full px-4 py-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-2 focus:ring-green-500"
+				>
+					<option value="">জেলা বেছে নিন</option>
+					{filteredDistricts.map((d) => (
+						<option key={d.id} value={d.id}>
+							{d.bn_name}
+						</option>
+					))}
+				</select>
 
-					{/* Already have an account? Link */}
-					<div className="flex items-center justify-between">
-						<div className="text-sm">
-							<Link href="/login" passHref>
-								<span className="font-medium text-green-600 hover:text-green-500">
-									আপনার অ্যাকাউন্ট আছে? লগইন করুন
-								</span>
-							</Link>
-						</div>
-					</div>
-				</form>
-			</div>
+				<select
+					name="upazila"
+					required
+					value={formData.upazila}
+					onChange={handleInputChange}
+					className="w-full px-4 py-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-2 focus:ring-green-500"
+				>
+					<option value="">উপজেলা বেছে নিন</option>
+					{filteredUpazilas.map((u) => (
+						<option key={u.id} value={u.id}>
+							{u.bn_name}
+						</option>
+					))}
+				</select>
+
+				<input
+					name="password"
+					type="password"
+					placeholder="পাসওয়ার্ড"
+					required
+					value={formData.password}
+					onChange={handleInputChange}
+					className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
+				/>
+
+				{error && <p className="text-red-500 text-sm">{error}</p>}
+
+				<button
+					type="submit"
+					className="w-full bg-green-600 text-white py-2 rounded hover:bg-green-500"
+				>
+					নিবন্ধন করুন
+				</button>
+
+				<p className="text-center text-sm mt-2">
+					<Link
+						href="/login"
+						className="text-green-600 hover:underline"
+					>
+						আপনার অ্যাকাউন্ট আছে? লগইন করুন
+					</Link>
+				</p>
+			</form>
 		</div>
 	);
 };

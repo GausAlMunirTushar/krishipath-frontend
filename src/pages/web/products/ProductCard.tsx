@@ -3,6 +3,7 @@
 import React from "react";
 import { CheckCircle } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 
 export type Product = {
 	id: string;
@@ -54,10 +55,13 @@ const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
 
 				{/* Button Section */}
 				<div className="mt-3">
-					<button className="w-full cursor-pointer flex items-center justify-center gap-2 text-sm font-medium bg-green-600 text-white hover:bg-green-700 transition-colors px-4 py-2 rounded-md">
+					<Link
+						href={`/products/${product.id}`}
+						className="w-full cursor-pointer flex items-center justify-center gap-2 text-sm font-medium bg-green-600 text-white hover:bg-green-700 transition-colors px-4 py-2 rounded-md"
+					>
 						<CheckCircle className="w-4 h-4" />
 						বিস্তারিত দেখুন
-					</button>
+					</Link>
 				</div>
 			</div>
 		</div>

@@ -5,7 +5,7 @@ import React from "react";
 
 const products: Product[] = [
 	{
-		id: 1,
+		id: "1",
 		title: "আলু (Potato)",
 		description: "নির্বাচিত গুণমান সম্পন্ন দেশি আলু।",
 		image: "/images/products/alu.png",
@@ -14,7 +14,7 @@ const products: Product[] = [
 		category: "শাকসবজি",
 	},
 	{
-		id: 2,
+		id: "2",
 		title: "টমেটো (Tomato)",
 		description: "তাজা ও পুষ্টিকর দেশি টমেটো।",
 		image: "/images/products/tomato.png",
@@ -23,7 +23,7 @@ const products: Product[] = [
 		category: "শাকসবজি",
 	},
 	{
-		id: 3,
+		id: "3",
 		title: "পেঁয়াজ (Onion)",
 		description: "রান্নার জন্য প্রয়োজনীয় তাজা পেঁয়াজ।",
 		image: "/images/products/onion.png",
@@ -32,7 +32,7 @@ const products: Product[] = [
 		category: "শাকসবজি",
 	},
 	{
-		id: 4,
+		id: "4",
 		title: "বেগুন (Brinjal)",
 		description: "সরাসরি কৃষকের কাছ থেকে সংগ্রহ করা তাজা বেগুন।",
 		image: "/images/products/gom.png",
@@ -41,7 +41,7 @@ const products: Product[] = [
 		category: "শাকসবজি",
 	},
 	{
-		id: 5,
+		id: "5",
 		title: "শসা (Cucumber)",
 		description: "শীতল ও পুষ্টিকর তাজা শসা।",
 		image: "/images/products/rosun.png",
@@ -50,7 +50,7 @@ const products: Product[] = [
 		category: "শাকসবজি",
 	},
 	{
-		id: 6,
+		id: "6",
 		title: "ধনিয়া পাতা (Coriander Leaves)",
 		description: "তাজা ও সুবাসিত ধনিয়া পাতা।",
 		image: "/images/products/sak.png",
@@ -59,7 +59,7 @@ const products: Product[] = [
 		category: "শাকসবজি",
 	},
 	{
-		id: 7,
+		id: "7",
 		title: "ধানের বীজ",
 		description: "উন্নত মানের উচ্চ ফলনশীল ধানের বীজ।",
 		image: "/images/products/gom.png",

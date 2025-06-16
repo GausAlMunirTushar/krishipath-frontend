@@ -1,4 +1,6 @@
-import faqData from "@/data/faqData";
+"use client";
+
+import { useEffect, useState } from "react";
 import productData from "@/data/productData";
 import successStories from "@/data/successStories";
 import FAQ from "@/pages/web/faq/FAQ";
@@ -8,8 +10,32 @@ import Weather from "@/pages/web/home/Weather";
 import WhyKrishipath from "@/pages/web/home/WhyKrishipath";
 import LiveMarketPriceFeed from "@/pages/web/live-market/LiveMarketPriceFeed";
 import FarmerSuccessStory from "@/pages/web/success-story/FarmerSuccessStory";
+import apiClient from "@/configs/apiConfig";
+
+interface FAQItem {
+	_id?: string;
+	question: string;
+	answer: string;
+}
 
 const HomePage = () => {
+	const [faqData, setFaqData] = useState<FAQItem[]>([]);
+
+	useEffect(() => {
+		const fetchFaqs = async () => {
+			try {
+				const res = await apiClient.get("/faq");
+				setFaqData(res.data.slice(0, 5));
+			} catch (error) {
+				console.error(
+					"Failed to fetch FAQs, using static data.",
+					error
+				);
+			}
+		};
+
+		fetchFaqs();
+	}, []);
 	return (
 		<main className="max-w-7xl mx-auto py-8">
 			<div className="px-6 lg:px-8 mb-8">

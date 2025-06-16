@@ -57,7 +57,7 @@ const HomePage = () => {
 
 			<div className="container mx-auto px-6 lg:px-8">
 				<h2 className="text-3xl font-semibold text-green-900 text-center">
-					লাইভ মার্কেট প্রাইস ফিড
+					সরাসরি বাজার মূল্য
 				</h2>
 				<p className="mt-4 text-lg text-gray-600 text-center">
 					এখানে বিভিন্ন পণ্যের বর্তমান বাজার মূল্য দেখানো হচ্ছে।

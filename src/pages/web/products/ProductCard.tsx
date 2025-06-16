@@ -32,7 +32,7 @@ const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
 					<h3 className="text-lg font-semibold text-gray-900">
 						{product.title}
 					</h3>
-					<p className="mt-2 text-gray-600 text-sm line-clamp-2">
+					<p className="mt-2 text-gray-600 text-sm line-clamp-2 truncate">
 						{product.description}
 					</p>
 
@@ -52,7 +52,7 @@ const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
 				</div>
 
 				{/* Button Section */}
-				<div className="mt-5">
+				<div className="mt-3">
 					<button className="w-full cursor-pointer flex items-center justify-center gap-2 text-sm font-medium bg-green-600 text-white hover:bg-green-700 transition-colors px-4 py-2 rounded-md">
 						<CheckCircle className="w-4 h-4" />
 						বিস্তারিত দেখুন

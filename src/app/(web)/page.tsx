@@ -63,7 +63,7 @@ const HomePage = () => {
 					এখানে বিভিন্ন পণ্যের বর্তমান বাজার মূল্য দেখানো হচ্ছে।
 				</p>
 
-				<div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12">
+				<div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-12">
 					{productData.map((product, index) => (
 						<ProductCard key={index} product={product} />
 					))}

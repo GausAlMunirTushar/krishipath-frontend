@@ -1,6 +1,7 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
+import { Eye, EyeOff, ChevronDown } from "lucide-react"; // Lucide icons
 
 interface Division {
 	id: string;
@@ -30,8 +31,8 @@ const RegisterPage: React.FC = () => {
 	});
 
 	const [error, setError] = useState<string | null>(null);
+	const [showPassword, setShowPassword] = useState(false);
 
-	// Location data
 	const [divisions, setDivisions] = useState<Division[]>([]);
 	const [districts, setDistricts] = useState<District[]>([]);
 	const [upazilas, setUpazilas] = useState<Upazila[]>([]);
@@ -40,7 +41,6 @@ const RegisterPage: React.FC = () => {
 	const [filteredUpazilas, setFilteredUpazilas] = useState<Upazila[]>([]);
 
 	useEffect(() => {
-		// Load all location data
 		const fetchData = async () => {
 			const [divRes, distRes, upaRes] = await Promise.all([
 				fetch("/data/bd-divisions.json"),
@@ -85,8 +85,6 @@ const RegisterPage: React.FC = () => {
 
 	const handleSubmit = (e: React.FormEvent) => {
 		e.preventDefault();
-
-		// Add more validation if needed
 		if (!formData.password || formData.password.length < 6) {
 			setError("পাসওয়ার্ড কমপক্ষে ৬ অক্ষরের হতে হবে।");
 			return;
@@ -95,6 +93,30 @@ const RegisterPage: React.FC = () => {
 		setError(null);
 		alert("নিবন্ধন সফল হয়েছে!");
 	};
+
+	const renderSelect = (
+		name: keyof typeof formData,
+		options: { id: string; bn_name: string }[],
+		placeholder: string
+	) => (
+		<div className="relative">
+			<select
+				name={name}
+				required
+				value={formData[name]}
+				onChange={handleInputChange}
+				className="w-full px-4 py-2 pr-10 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-2 focus:ring-green-500 appearance-none"
+			>
+				<option value="">{placeholder}</option>
+				{options.map((item) => (
+					<option key={item.id} value={item.id}>
+						{item.bn_name}
+					</option>
+				))}
+			</select>
+			<ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500 pointer-events-none" />
+		</div>
+	);
 
 	return (
 		<div className="bg-gray-50 flex justify-center py-10 px-4">
@@ -135,74 +157,43 @@ const RegisterPage: React.FC = () => {
 					className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
 				/>
 
-				<select
-					name="userType"
-					required
-					value={formData.userType}
-					onChange={handleInputChange}
-					className="w-full px-4 py-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-2 focus:ring-green-500"
-				>
-					<option value="">ইউজার টাইপ বেছে নিন</option>
-					<option value="farmer">কৃষক</option>
-					<option value="business">ব্যবসায়ী</option>
-					<option value="general">সাধারণ</option>
-					<option value="agent">এজেন্ট</option>
-				</select>
+				{renderSelect(
+					"userType",
+					[
+						{ id: "farmer", bn_name: "কৃষক" },
+						{ id: "business", bn_name: "ব্যবসায়ী" },
+						{ id: "general", bn_name: "সাধারণ" },
+						{ id: "agent", bn_name: "এজেন্ট" },
+					],
+					"ইউজার টাইপ বেছে নিন"
+				)}
 
-				<select
-					name="division"
-					required
-					value={formData.division}
-					onChange={handleInputChange}
-					className="w-full px-4 py-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-2 focus:ring-green-500"
-				>
-					<option value="">বিভাগ বেছে নিন</option>
-					{divisions.map((d) => (
-						<option key={d.id} value={d.id}>
-							{d.bn_name}
-						</option>
-					))}
-				</select>
+				{renderSelect("division", divisions, "বিভাগ বেছে নিন")}
+				{renderSelect("district", filteredDistricts, "জেলা বেছে নিন")}
+				{renderSelect("upazila", filteredUpazilas, "উপজেলা বেছে নিন")}
 
-				<select
-					name="district"
-					required
-					value={formData.district}
-					onChange={handleInputChange}
-					className="w-full px-4 py-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-2 focus:ring-green-500"
-				>
-					<option value="">জেলা বেছে নিন</option>
-					{filteredDistricts.map((d) => (
-						<option key={d.id} value={d.id}>
-							{d.bn_name}
-						</option>
-					))}
-				</select>
-
-				<select
-					name="upazila"
-					required
-					value={formData.upazila}
-					onChange={handleInputChange}
-					className="w-full px-4 py-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-2 focus:ring-green-500"
-				>
-					<option value="">উপজেলা বেছে নিন</option>
-					{filteredUpazilas.map((u) => (
-						<option key={u.id} value={u.id}>
-							{u.bn_name}
-						</option>
-					))}
-				</select>
-
-				<input
-					name="password"
-					type="password"
-					placeholder="পাসওয়ার্ড"
-					required
-					value={formData.password}
-					onChange={handleInputChange}
-					className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
-				/>
+				<div className="relative">
+					<input
+						name="password"
+						type={showPassword ? "text" : "password"}
+						placeholder="পাসওয়ার্ড"
+						required
+						value={formData.password}
+						onChange={handleInputChange}
+						className="w-full px-4 py-2 border border-gray-300 rounded-md pr-10 focus:outline-none focus:ring-2 focus:ring-green-500"
+					/>
+					<button
+						type="button"
+						onClick={() => setShowPassword((prev) => !prev)}
+						className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-600"
+					>
+						{showPassword ? (
+							<EyeOff className="w-5 h-5" />
+						) : (
+							<Eye className="w-5 h-5" />
+						)}
+					</button>
+				</div>
 
 				{error && <p className="text-red-500 text-sm">{error}</p>}
 

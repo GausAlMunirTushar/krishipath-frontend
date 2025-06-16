@@ -173,7 +173,7 @@ const AboutPage: React.FC = () => {
 							<h4 className="text-lg font-semibold text-green-900">
 								মো: গাউস আল মুনির তুষার
 							</h4>
-							<p className="text-gray-600">প্রযুক্তি উপদেষ্টা</p>
+							<p className="text-gray-600">প্রযুক্তি পরিচালক</p>
 							<p className="text-sm text-gray-500">কৃষিপথ</p>
 							<p className="text-sm text-gray-500">01726814131</p>
 							<p className="text-sm mt-2">

@@ -16,6 +16,14 @@ export type Product = {
 };
 
 const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
+	if (!product || !product.image) {
+		return (
+			<div className="bg-red-50 text-red-700 p-4 rounded shadow">
+				<p>Invalid product data.</p>
+			</div>
+		);
+	}
+
 	return (
 		<div className="bg-white border border-gray-100 hover:border-green-500 rounded-xl shadow-sm hover:shadow-lg transition-shadow duration-300 flex flex-col h-full">
 			{/* Image Section */}

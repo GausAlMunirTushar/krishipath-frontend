@@ -1,20 +1,39 @@
+"use client"; // Required for hooks like useParams
+
 import { notFound } from "next/navigation";
-import productData from "@/data/productData";
+import { useParams } from "next/navigation";
 import ProductDetails from "@/pages/web/products/ProductDetails";
+import productData from "@/data/productData";
+import { useEffect, useState } from "react";
 
-interface PageProps {
-	params: { id: string };
-}
+export default function ProductPage() {
+	const params = useParams<{ id: string }>();
+	const [product, setProduct] = useState<(typeof productData)[0] | null>(
+		null
+	);
+	const [loading, setLoading] = useState(true);
 
-export function generateStaticParams() {
-	return productData.map((product) => ({
-		id: product.id,
-	}));
-}
+	useEffect(() => {
+		if (params?.id) {
+			const foundProduct = productData.find(
+				(p) => String(p.id) === params.id
+			);
+			setProduct(foundProduct || null);
+			setLoading(false);
+		}
+	}, [params?.id]);
 
-export default function ProductPage({ params }: PageProps) {
-	const product = productData.find((p) => String(p.id) === params.id);
-	if (!product) return notFound();
+	if (loading) {
+		return <div>Loading...</div>;
+	}
 
-	return <ProductDetails product={product} />;
+	if (!product) {
+		notFound();
+	}
+
+	return (
+		<div className="product-page">
+			<ProductDetails product={product} />
+		</div>
+	);
 }

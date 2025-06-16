@@ -6,6 +6,13 @@ import Image from "next/image";
 import { Product } from "./ProductCard";
 
 const ProductDetails: React.FC<{ product: Product }> = ({ product }) => {
+	if (!product || !product.image) {
+		return (
+			<div className="bg-red-50 text-red-700 p-4 rounded shadow">
+				<p>Invalid product data.</p>
+			</div>
+		);
+	}
 	return (
 		<div className="min-h-screen bg-white py-12 px-6 md:px-16">
 			<div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 items-start">

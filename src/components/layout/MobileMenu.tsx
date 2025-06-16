@@ -10,7 +10,7 @@ const MobileMenu: React.FC = () => {
 
 	const links = [
 		{ href: "/", label: "হোম", icon: Home },
-		{ href: "/products", label: "কৃষি বাজার", icon: ShoppingCart },
+		{ href: "/krishi-bazar", label: "কৃষি বাজার", icon: ShoppingCart },
 		{ href: "/services", label: "সেবা", icon: ListFilterPlus },
 		{ href: "/about", label: "আমাদের সম্পর্কে", icon: Info },
 		{ href: "/contact", label: "যোগাযোগ", icon: Phone },

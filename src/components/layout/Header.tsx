@@ -10,7 +10,7 @@ const Header = () => {
 
 	const navItems = [
 		{ href: "/", label: "হোম" },
-		{ href: "/products", label: "কৃষি বাজার" },
+		{ href: "/krishi-bazar", label: "কৃষি বাজার" },
 		{ href: "/services", label: "সেবাসমূহ" },
 		{ href: "/about", label: "আমাদের সম্পর্কে" },
 		{ href: "/contact", label: "যোগাযোগ" },

@@ -5,6 +5,7 @@ import { CheckCircle } from "lucide-react";
 import Image from "next/image";
 
 export type Product = {
+	id: string;
 	title: string;
 	description: string;
 	image: string;

@@ -14,6 +14,7 @@ import {
 	BookOpen,
 	PhoneCall,
 	Settings,
+	FileQuestion,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -26,6 +27,7 @@ const menuItems = [
 	{ name: "Live Market", href: "/admin/live-market", icon: BarChart },
 	{ name: "Farmer Stories", href: "/admin/farmer-stories", icon: BookOpen },
 	{ name: "Contact", href: "/admin/contact", icon: PhoneCall },
+	{ name: "FAQ", href: "/admin/faq", icon: FileQuestion },
 	{ name: "Settings", href: "/admin/settings", icon: Settings },
 ];
 

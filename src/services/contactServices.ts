@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import apiClient from "./apiConfig";
+import apiClient from "../configs/apiConfig";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 

@@ -14,7 +14,7 @@ import {
 
 const AboutPage: React.FC = () => {
 	return (
-		<div className="bg-gray-50 py-10 sm:py-20">
+		<div className="bg-gray-50 py-10">
 			<div className="max-w-7xl mx-auto px-6 lg:px-8">
 				{/* Header Section */}
 				<div className="text-center mb-12">
@@ -133,9 +133,7 @@ const AboutPage: React.FC = () => {
 								মোঃ রিফাত আল মাহামুদ
 							</h4>
 							<p className="text-gray-600">প্রকল্প পরিচালক</p>
-							<p className="text-sm text-gray-500">
-								বালিয়াডাঙ্গী পাইলট মডেল উচ্চ বিদ্যালয়
-							</p>
+							<p className="text-sm text-gray-500">কৃষিপথ</p>
 							<p className="text-sm text-gray-500">01581483444</p>
 							<p className="text-sm mt-2">
 								সামগ্রিক পরিকল্পনা, Krishi Bazar রোডম্যাপ ও
@@ -154,9 +152,7 @@ const AboutPage: React.FC = () => {
 								মোঃ মুনতাছির মাহিন
 							</h4>
 							<p className="text-gray-600">সহকারী পরিচালক</p>
-							<p className="text-sm text-gray-500">
-								লাহিড়ী বহুমুখী উচ্চ বিদ্যালয়
-							</p>
+							<p className="text-sm text-gray-500">কৃষিপথ</p>
 							<p className="text-sm text-gray-500">01897950236</p>
 							<p className="text-sm mt-2">
 								ডেটা সংগ্রহ ও বিশ্লেষণ, ফিচার পরিকল্পনা

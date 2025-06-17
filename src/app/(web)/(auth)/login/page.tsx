@@ -30,9 +30,9 @@ const LoginPage: React.FC = () => {
 			const { token, user } = res;
 
 			// Save to cookies
-			Cookies.set("token", token);
-			Cookies.set("role", user.role);
-			Cookies.set("userId", user.id);
+			Cookies.set("token", token, { expires: 7 });
+			Cookies.set("role", user.role, { expires: 7 });
+			Cookies.set("userId", user.id, { expires: 7 });
 
 			// Redirect based on role
 			if (user.role === "admin") {

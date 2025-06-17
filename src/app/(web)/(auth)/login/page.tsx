@@ -4,10 +4,12 @@ import Link from "next/link";
 import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
 import { loginUser } from "@/services/authServices";
+import { Eye, EyeOff } from "lucide-react";
 
 const LoginPage: React.FC = () => {
+	const [showPassword, setShowPassword] = useState(false);
 	const [formData, setFormData] = useState({
-		email: "",
+		phone: "",
 		password: "",
 	});
 	const [error, setError] = useState<string | null>(null);
@@ -24,7 +26,7 @@ const LoginPage: React.FC = () => {
 		setLoading(true);
 		setError(null);
 		try {
-			const res = await loginUser(formData.email, formData.password);
+			const res = await loginUser(formData.phone, formData.password);
 			const { token, user } = res;
 
 			// Save to cookies
@@ -66,27 +68,37 @@ const LoginPage: React.FC = () => {
 					<div className="rounded-md -space-y-px">
 						<div>
 							<input
-								id="email"
-								name="email"
-								type="email"
+								id="phone"
+								name="phone"
+								type="tel"
 								required
-								value={formData.email}
+								value={formData.phone}
 								onChange={handleInputChange}
-								className="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-green-500 focus:border-green-500 focus:z-10 sm:text-sm"
-								placeholder="ইমেল"
+								className="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-2 focus:ring-green-500 sm:text-sm"
+								placeholder="আপনার মোবাইল নম্বর দিন"
 							/>
 						</div>
-						<div className="mt-4">
+						<div className="relative mt-3">
 							<input
-								id="password"
 								name="password"
-								type="password"
+								type={showPassword ? "text" : "password"}
+								placeholder="আপনার পাসওয়ার্ডটি লিখুন"
 								required
 								value={formData.password}
 								onChange={handleInputChange}
-								className="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-green-500 focus:border-green-500 focus:z-10 sm:text-sm"
-								placeholder="পাসওয়ার্ড"
+								className="w-full px-3 py-1.5 border border-gray-300 rounded-md pr-10 focus:outline-none focus:ring-2 focus:ring-green-500"
 							/>
+							<button
+								type="button"
+								onClick={() => setShowPassword((prev) => !prev)}
+								className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-600"
+							>
+								{showPassword ? (
+									<EyeOff className="w-5 h-5" />
+								) : (
+									<Eye className="w-5 h-5" />
+								)}
+							</button>
 						</div>
 					</div>
 

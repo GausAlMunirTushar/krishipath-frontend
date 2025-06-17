@@ -131,7 +131,7 @@ const RegisterPage: React.FC = () => {
 				<input
 					name="name"
 					type="text"
-					placeholder="নাম"
+					placeholder="আপনার নাম"
 					required
 					value={formData.name}
 					onChange={handleInputChange}
@@ -150,7 +150,7 @@ const RegisterPage: React.FC = () => {
 				<input
 					name="phone"
 					type="tel"
-					placeholder="ফোন নম্বর"
+					placeholder="আপনার ফোন নম্বর দিন"
 					required
 					value={formData.phone}
 					onChange={handleInputChange}
@@ -165,7 +165,7 @@ const RegisterPage: React.FC = () => {
 						{ id: "general", bn_name: "সাধারণ" },
 						{ id: "agent", bn_name: "এজেন্ট" },
 					],
-					"ইউজার টাইপ বেছে নিন"
+					"ব্যবহারকারী ধরন বেছে নিন"
 				)}
 
 				{renderSelect("division", divisions, "বিভাগ বেছে নিন")}
@@ -176,7 +176,7 @@ const RegisterPage: React.FC = () => {
 					<input
 						name="password"
 						type={showPassword ? "text" : "password"}
-						placeholder="পাসওয়ার্ড"
+						placeholder="আপনার পাসওয়ার্ডটি দিন"
 						required
 						value={formData.password}
 						onChange={handleInputChange}

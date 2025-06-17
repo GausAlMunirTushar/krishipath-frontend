@@ -4,19 +4,21 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import {
-	User,
-	PackageCheck,
-	ShoppingCart,
+	LayoutDashboard,
+	ShoppingBasket,
+	ClipboardList,
+	UserRound,
 	Settings,
 	ChevronLeft,
 	ChevronRight,
 } from "lucide-react";
 
 const menuItems = [
-	{ name: "My Account", href: "/user/my-account", icon: User },
-	{ name: "Orders", href: "/user/orders", icon: ShoppingCart },
-	{ name: "Products", href: "/user/products", icon: PackageCheck },
-	{ name: "Settings", href: "/user/settings", icon: Settings },
+	{ href: "/user/dashboard", name: "ড্যাশবোর্ড", icon: LayoutDashboard },
+	{ href: "/user/krishi-bazar", name: "আমার বাজার", icon: ShoppingBasket },
+	{ href: "/user/order", name: "অর্ডারসমূহ", icon: ClipboardList },
+	{ href: "/user/my-account", name: "আমার প্রোফাইল", icon: UserRound },
+	{ href: "/user/settings", name: "সেটিংস", icon: Settings },
 ];
 
 export default function UserSidebar({
@@ -35,7 +37,7 @@ export default function UserSidebar({
 				isOpen ? "w-56" : "w-16"
 			)}
 		>
-			<div className="flex items-center justify-between px-4 py-4 border-b border-gray-200">
+			<div className="flex items-center justify-between px-4 py-6 border-b shadow-sm border-gray-200">
 				{isOpen ? (
 					<img src="/images/logo.svg" alt="Logo" className="h-6" />
 				) : (
@@ -50,7 +52,7 @@ export default function UserSidebar({
 				</button>
 			</div>
 
-			<nav className="mt-4 space-y-1">
+			<nav className="mt-4 space-y-1 px-2">
 				{menuItems.map(({ name, href, icon: Icon }) => (
 					<Link
 						key={name}

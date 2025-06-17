@@ -107,19 +107,16 @@ const DivisionMap = ({ productData }: { productData: Product[] }) => {
 		);
 	}, []);
 
-	// Style for divisions on map
 	const divisionStyle = {
-		fillColor: "#a5b4fc",
-		fillOpacity: 0.6,
-		color: "#4338ca",
+		fillColor: "#86efac",
+		color: "#16a34a",
 		weight: 1,
 	};
 
-	// Hover style for divisions
 	const divisionHoverStyle = {
-		fillColor: "#6366f1",
+		fillColor: "#22c55e",
 		fillOpacity: 0.8,
-		color: "#312e81",
+		color: "#166534",
 		weight: 2,
 	};
 
@@ -217,7 +214,7 @@ const DivisionMap = ({ productData }: { productData: Product[] }) => {
 			</div>
 
 			{/* Sidebar showing products */}
-			<div className="w-full lg:w-1/2 max-h-[600px] overflow-y-auto border rounded-md p-4 shadow-inner bg-white">
+			<div className="w-full lg:w-1/2 max-h-[600px] overflow-y-auto border-2 border-green-400 rounded-md p-4 shadow-inner bg-white">
 				<h2 className="text-lg font-semibold mb-4 text-center">
 					{selectedDivision
 						? `এই বিভাগের পণ্যসমূহ: ${selectedDivision}`
@@ -229,9 +226,9 @@ const DivisionMap = ({ productData }: { productData: Product[] }) => {
 						{filteredProducts.map((product) => (
 							<li
 								key={product.id}
-								className="border p-3 bg-gray-50 rounded hover:shadow transition"
+								className="border-2 border-green-500 p-3 bg-gray-50 rounded hover:shadow transition"
 							>
-								<p className="font-bold text-indigo-600">
+								<p className="font-bold text-green-600">
 									{product.name}
 								</p>
 								<p className="text-sm text-gray-700">

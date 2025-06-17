@@ -1,7 +1,9 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import { Eye, EyeOff, ChevronDown } from "lucide-react"; // Lucide icons
+import { Eye, EyeOff, ChevronDown } from "lucide-react";
+import { registerUser } from "@/services/authServices";
 
 interface Division {
 	id: string;
@@ -83,17 +85,43 @@ const RegisterPage: React.FC = () => {
 		setFormData((prev) => ({ ...prev, [name]: value }));
 	};
 
-	const handleSubmit = (e: React.FormEvent) => {
+	const handleSubmit = async (e: React.FormEvent) => {
 		e.preventDefault();
 		if (!formData.password || formData.password.length < 6) {
 			setError("পাসওয়ার্ড কমপক্ষে ৬ অক্ষরের হতে হবে।");
 			return;
 		}
 
-		setError(null);
-		alert("নিবন্ধন সফল হয়েছে!");
-	};
+		try {
+			setError(null);
 
+			await registerUser({
+				name: formData.name,
+				email: formData.email || undefined,
+				phone: formData.phone,
+				password: formData.password,
+				role: formData.userType,
+				division: formData.division,
+				district: formData.district,
+				upazila: formData.upazila,
+			});
+
+			alert("নিবন্ধন সফল হয়েছে!");
+			setFormData({
+				name: "",
+				email: "",
+				phone: "",
+				userType: "",
+				division: "",
+				district: "",
+				upazila: "",
+				password: "",
+			});
+		} catch (err: any) {
+			console.error(err);
+			setError(err?.response?.data?.message || "নিবন্ধন ব্যর্থ হয়েছে");
+		}
+	};
 	const renderSelect = (
 		name: keyof typeof formData,
 		options: { id: string; bn_name: string }[],

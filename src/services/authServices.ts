@@ -1,11 +1,23 @@
-import axios from "axios";
+import apiClient from "@/configs/apiConfig";
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL;
-
-export const loginUser = async (email: string, password: string) => {
-	const response = await axios.post(`${API_URL}/auth/login`, {
-		email,
+export const loginUser = async (phone: string, password: string) => {
+	const response = await apiClient.post(`/auth/login`, {
+		phone,
 		password,
 	});
+	return response.data;
+};
+
+export const registerUser = async (formData: {
+	name: string;
+	email?: string;
+	phone: string;
+	password: string;
+	role: string;
+	division?: string;
+	district?: string;
+	upazila?: string;
+}) => {
+	const response = await apiClient.post(`/auth/register`, formData);
 	return response.data;
 };

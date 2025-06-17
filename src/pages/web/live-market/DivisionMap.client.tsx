@@ -1,29 +1,28 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
-
 import { useEffect, useMemo, useState } from "react";
-import {
-	MapContainer,
-	TileLayer,
-	GeoJSON,
-	Marker,
-	Popup,
-	useMap,
-} from "react-leaflet";
-import "leaflet/dist/leaflet.css";
-import L from "leaflet";
 
+import { MapContainer, TileLayer, GeoJSON, Marker, Popup } from "react-leaflet";
 import type { Feature, FeatureCollection, Geometry } from "geojson";
 
-const DefaultIcon = L.icon({
-	iconUrl: "/images/leaflet/marker-icon.png",
-	shadowUrl: "/images/leaflet/marker-shadow.png",
-	iconSize: [25, 41],
-	iconAnchor: [12, 41],
-	popupAnchor: [1, -34],
-	shadowSize: [41, 41],
-});
-L.Marker.prototype.options.icon = DefaultIcon;
+import "leaflet/dist/leaflet.css";
+import L from "leaflet";
+import { setupLeafletIcon } from "@/utils/setupLeaflet";
+
+// let DefaultIcon: L.Icon | null = null;
+
+// if (typeof window !== "undefined") {
+// 	DefaultIcon = L.icon({
+// 		iconUrl: "/images/leaflet/marker-icon.png",
+// 		shadowUrl: "/images/leaflet/marker-shadow.png",
+// 		iconSize: [25, 41],
+// 		iconAnchor: [12, 41],
+// 		popupAnchor: [1, -34],
+// 		shadowSize: [41, 41],
+// 	});
+
+// 	L.Marker.prototype.options.icon = DefaultIcon;
+// }
 
 type Product = {
 	id: string;
@@ -40,18 +39,6 @@ type Division = {
 	long: string;
 };
 
-const SetViewToUserLocation = ({
-	location,
-}: {
-	location: [number, number];
-}) => {
-	const map = useMap();
-	useEffect(() => {
-		map.setView(location, 7);
-	}, [location, map]);
-	return null;
-};
-
 const DivisionMap = ({ productData }: { productData: Product[] }) => {
 	const [geoJsonData, setGeoJsonData] = useState<FeatureCollection | null>(
 		null
@@ -60,12 +47,12 @@ const DivisionMap = ({ productData }: { productData: Product[] }) => {
 	const [selectedDivision, setSelectedDivision] = useState<string | null>(
 		null
 	);
-	const [userLocation, setUserLocation] = useState<[number, number] | null>(
-		null
-	);
-	const [locationError, setLocationError] = useState<string | null>(null);
+	useEffect(() => {
+		(async () => {
+			await setupLeafletIcon();
+		})();
+	}, []);
 
-	// Load Bangladesh GeoJSON boundaries for divisions
 	useEffect(() => {
 		fetch("/data/bangladesh.geojson")
 			.then((res) => res.json())
@@ -73,7 +60,6 @@ const DivisionMap = ({ productData }: { productData: Product[] }) => {
 			.catch(() => setGeoJsonData(null));
 	}, []);
 
-	// Load division metadata with lat/long
 	useEffect(() => {
 		fetch("/data/bd-divisions.json")
 			.then((res) => res.json())
@@ -81,34 +67,9 @@ const DivisionMap = ({ productData }: { productData: Product[] }) => {
 			.catch(() => setDivisions([]));
 	}, []);
 
-	// Get user location from browser
-	useEffect(() => {
-		if (!navigator.geolocation) {
-			setLocationError("আপনার ব্রাউজারে লোকেশন সাপোর্ট নেই।");
-			return;
-		}
-
-		navigator.geolocation.getCurrentPosition(
-			(pos) => {
-				const { latitude, longitude } = pos.coords;
-				setUserLocation([latitude, longitude]);
-			},
-			(err) => {
-				const msg =
-					err.code === err.PERMISSION_DENIED
-						? "আপনি লোকেশন পারমিশন প্রদান করেননি।"
-						: err.code === err.POSITION_UNAVAILABLE
-						? "লোকেশন তথ্য পাওয়া যায়নি।"
-						: err.code === err.TIMEOUT
-						? "লোকেশন নেওয়ার সময়সীমা শেষ হয়েছে।"
-						: "অজানা ত্রুটি ঘটেছে।";
-				setLocationError(msg);
-			}
-		);
-	}, []);
-
 	const divisionStyle = {
 		fillColor: "#86efac",
+		fillOpacity: 0.6,
 		color: "#16a34a",
 		weight: 1,
 	};
@@ -120,7 +81,6 @@ const DivisionMap = ({ productData }: { productData: Product[] }) => {
 		weight: 2,
 	};
 
-	// Called for each GeoJSON feature (division)
 	const onEachDivision = (
 		feature: Feature<Geometry, any>,
 		layer: L.Layer
@@ -149,7 +109,6 @@ const DivisionMap = ({ productData }: { productData: Product[] }) => {
 		});
 	};
 
-	// Filter products by selected division (case insensitive)
 	const filteredProducts = useMemo(() => {
 		if (!selectedDivision) return [];
 		return productData.filter(
@@ -159,8 +118,7 @@ const DivisionMap = ({ productData }: { productData: Product[] }) => {
 
 	return (
 		<div className="w-full flex flex-col lg:flex-row gap-4">
-			{/* Map section */}
-			<div className="w-full lg:w-1/2 h-[600px] relative rounded-md overflow-hidden shadow-lg z-0">
+			<div className="w-full lg:w-1/2 h-56 sm:h-[600px] relative rounded-md overflow-hidden shadow-lg z-0">
 				<MapContainer
 					center={[23.685, 90.3563]}
 					zoom={6.5}
@@ -172,7 +130,6 @@ const DivisionMap = ({ productData }: { productData: Product[] }) => {
 						url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
 					/>
 
-					{/* Bangladesh Divisions Boundary */}
 					{geoJsonData && (
 						<GeoJSON
 							data={geoJsonData}
@@ -181,7 +138,6 @@ const DivisionMap = ({ productData }: { productData: Product[] }) => {
 						/>
 					)}
 
-					{/* Division Markers */}
 					{divisions.map((d) => (
 						<Marker
 							key={d.id}
@@ -193,27 +149,9 @@ const DivisionMap = ({ productData }: { productData: Product[] }) => {
 							<Popup>{d.bn_name}</Popup>
 						</Marker>
 					))}
-
-					{/* User location marker */}
-					{userLocation && (
-						<>
-							<SetViewToUserLocation location={userLocation} />
-							<Marker position={userLocation}>
-								<Popup>আপনার বর্তমান অবস্থান</Popup>
-							</Marker>
-						</>
-					)}
 				</MapContainer>
-
-				{/* Location error message */}
-				{locationError && (
-					<p className="text-red-600 mt-2 text-center font-medium">
-						⚠️ {locationError}
-					</p>
-				)}
 			</div>
 
-			{/* Sidebar showing products */}
 			<div className="w-full lg:w-1/2 max-h-[600px] overflow-y-auto border-2 border-green-400 rounded-md p-4 shadow-inner bg-white">
 				<h2 className="text-lg font-semibold mb-4 text-center">
 					{selectedDivision

@@ -1,28 +1,28 @@
 "use client";
+import dynamic from "next/dynamic";
 
-import DivisionMap from "./DivisionMap";
+const DivisionMap = dynamic(() => import("./DivisionMap.client"), {
+	ssr: false,
+	loading: () => <p className="text-center">মানচিত্র লোড হচ্ছে...</p>,
+});
 
 const sampleProducts = [
 	{ id: "1", name: "আলু", price: 30, division: "Dhaka" },
-	{ id: "2", name: "Onion", price: 40, division: "Rajshahi" },
-	{ id: "3", name: "Garlic", price: 55, division: "Khulna" },
+	{ id: "2", name: "পেঁয়াজ", price: 40, division: "Rajshahi" },
+	{ id: "3", name: "রসুন", price: 55, division: "Khulna" },
 ];
 
 export default function DivisionMapWrapper() {
 	return (
-		<div className="max-w-7xl mx-auto py-10 px-8">
-			{/* Title */}
-			<h1 className="text-3xl font-bold mb-2 text-green-500 text-center">
+		<section className="max-w-7xl mx-auto py-12 px-6">
+			<h1 className="text-4xl font-bold text-green-600 text-center mb-4">
 				বাংলাদেশের সরাসরি বাজার মূল্য
 			</h1>
-
-			{/* Description */}
-			<p className="text-center text-green-800 mb-6 max-w-5xl mx-auto">
-				এখানে বাংলাদেশের প্রতিটি বিভাগের বাজার থেকে সরাসরি মূল্য তথ্য
-				দেখুন। প্রতিটি পণ্যের মূল্য বাজারের বর্তমান অবস্থা অনুযায়ী
-				নিয়মিত আপডেট হয়, যাতে আপনি সঠিক সিদ্ধান্ত নিতে পারেন।
+			<p className="text-center text-green-900 text-lg mb-8">
+				বিভিন্ন বিভাগের বাজার থেকে সরাসরি পণ্যের মূল্য তথ্য দেখুন।
 			</p>
+
 			<DivisionMap productData={sampleProducts} />
-		</div>
+		</section>
 	);
 }

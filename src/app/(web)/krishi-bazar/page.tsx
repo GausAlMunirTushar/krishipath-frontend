@@ -13,7 +13,7 @@ export default function Page() {
 		{
 			type: "বিক্রয়",
 			user: "Reja",
-			image: "/farm.jpg",
+			image: "/images/products/alu.png",
 			price: "২০",
 			unit: "কেজি",
 			date: "2025-05-26",
@@ -23,6 +23,7 @@ export default function Page() {
 		{
 			type: "বিক্রয়",
 			user: "Md Rakib",
+			image: "/images/products/onion.png",
 			price: "৩৫০",
 			unit: "কেজি",
 			date: "2025-05-05",
@@ -51,7 +52,7 @@ export default function Page() {
 				</h2>
 				<button
 					onClick={() => setOpenModal(true)}
-					className="flex items-center gap-2 bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700"
+					className="flex items-center gap-2 bg-green-600 text-white px-2 py-1 rounded hover:bg-green-700"
 				>
 					<Plus className="w-4 h-4" /> পোস্ট তৈরি করুন
 				</button>
@@ -75,7 +76,7 @@ export default function Page() {
 			</div>
 
 			{/* Cards */}
-			<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+			<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
 				{posts
 					.filter((p) => p.type === tab)
 					.map((post, idx) => (

@@ -24,22 +24,20 @@ export default function PostCard({
 	note,
 }: PostProps) {
 	return (
-		<div className="border-2 border-green-500 rounded-xl bg-white shadow-sm hover:shadow-md transition-all overflow-hidden">
-			{/* Image */}
+		<div className="border border-gray-200 rounded-lg hover:border-green-500 bg-white shadow-sm hover:shadow-md transition-all flex flex-col overflow-hidden">
+			{/* Image Full Width */}
 			{image && (
-				<div className="flex justify-center p-4 pb-0">
-					<img
-						src={image}
-						alt="post"
-						className="w-28 h-28 rounded-full object-cover border"
-					/>
-				</div>
+				<img
+					src={image}
+					alt="post"
+					className="w-full h-40 object-contain rounded-t-sm border-b border-gray-200"
+				/>
 			)}
 
 			{/* Content */}
-			<div className="bg-white px-4 py-4 space-y-2">
-				{/* User and Type */}
-				<h3 className="text-lg font-bold text-gray-800">
+			<div className="flex flex-col justify-between p-4 flex-1 space-y-2">
+				{/* Title */}
+				<h3 className="text-base font-bold text-gray-800">
 					{user}{" "}
 					<span className="text-sm font-normal text-gray-500">
 						({type})
@@ -47,11 +45,11 @@ export default function PostCard({
 				</h3>
 
 				{/* Note */}
-				<p className="text-sm text-gray-600">{note}</p>
+				<p className="text-sm text-gray-600 line-clamp-2">{note}</p>
 
 				{/* Badge and Price */}
 				<div className="flex justify-between items-center">
-					<span className="text-xs bg-green-100 text-green-700 font-semibold px-3 py-1 rounded-full">
+					<span className="text-xs bg-green-100 text-green-700 font-semibold px-2 py-1 rounded">
 						{type}
 					</span>
 					<span className="text-sm font-semibold text-green-800">
@@ -59,14 +57,14 @@ export default function PostCard({
 					</span>
 				</div>
 
-				{/* Interested + Date */}
+				{/* Meta */}
 				<div className="flex justify-between text-xs text-gray-500">
 					<span>{interested} জন আগ্রহী</span>
 					<span>{date}</span>
 				</div>
 
-				{/* Button */}
-				<button className="w-full mt-2 flex items-center justify-center gap-2 bg-green-600 hover:bg-green-700 text-white text-sm py-2 rounded-md transition">
+				{/* Action */}
+				<button className="mt-2 w-full flex items-center justify-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white text-sm py-2 rounded-md transition">
 					<CheckCircle className="w-4 h-4" />
 					বিস্তারিত দেখুন
 				</button>

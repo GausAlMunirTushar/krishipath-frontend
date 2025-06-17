@@ -18,7 +18,7 @@ const Hero = () => {
 						বাড়ানোর সুযোগ প্রদান করে।
 					</p>
 					<div className="mt-6 flex flex-col md:flex-row items-center gap-4 justify-center md:justify-start">
-						<Link href="/products">
+						<Link href="/services">
 							<button className="text-white cursor-pointer px-4 py-2 rounded-md bg-green-600 hover:bg-green-700">
 								আমাদের সেবা দেখুন
 							</button>

@@ -4,7 +4,7 @@ import { ShoppingCart, CloudRain, LineChart, Smile } from "lucide-react";
 import Link from "next/link";
 
 const services = [
-	{ icon: ShoppingCart, title: "কৃষি বাজার", href: "/products" },
+	{ icon: ShoppingCart, title: "কৃষি বাজার", href: "/krishi-bazar" },
 	{ icon: CloudRain, title: "লাইভ আবহাওয়া", href: "/weather" },
 	{ icon: LineChart, title: "লাইভ বাজারদর", href: "/live-market" },
 	{ icon: Smile, title: "কর্মসংস্থান সৃষ্টি", href: "/apply-agent" },

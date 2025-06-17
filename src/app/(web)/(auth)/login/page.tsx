@@ -37,8 +37,10 @@ const LoginPage: React.FC = () => {
 			// Redirect based on role
 			if (user.role === "admin") {
 				router.push("/admin/dashboard");
+			} else if (user.role === "agent") {
+				router.push("/agent/dashboard");
 			} else {
-				router.push("/dashboard");
+				router.push("/user/dashboard");
 			}
 		} catch (err: unknown) {
 			if (err instanceof Error) {

@@ -1,28 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 import { useEffect, useMemo, useState } from "react";
-
-import { MapContainer, TileLayer, GeoJSON, Marker, Popup } from "react-leaflet";
 import type { Feature, FeatureCollection, Geometry } from "geojson";
 
+// Import Leaflet CSS
 import "leaflet/dist/leaflet.css";
-import L from "leaflet";
-import { setupLeafletIcon } from "@/utils/setupLeaflet";
-
-// let DefaultIcon: L.Icon | null = null;
-
-// if (typeof window !== "undefined") {
-// 	DefaultIcon = L.icon({
-// 		iconUrl: "/images/leaflet/marker-icon.png",
-// 		shadowUrl: "/images/leaflet/marker-shadow.png",
-// 		iconSize: [25, 41],
-// 		iconAnchor: [12, 41],
-// 		popupAnchor: [1, -34],
-// 		shadowSize: [41, 41],
-// 	});
-
-// 	L.Marker.prototype.options.icon = DefaultIcon;
-// }
 
 type Product = {
 	id: string;
@@ -47,25 +29,66 @@ const DivisionMap = ({ productData }: { productData: Product[] }) => {
 	const [selectedDivision, setSelectedDivision] = useState<string | null>(
 		null
 	);
+	const [mapComponents, setMapComponents] = useState<any>(null);
+	const [leafletLoaded, setLeafletLoaded] = useState(false);
+
+	// Dynamically import all map-related components
 	useEffect(() => {
-		(async () => {
-			await setupLeafletIcon();
-		})();
+		const loadMapComponents = async () => {
+			try {
+				const [
+					{ MapContainer, TileLayer, GeoJSON, Marker, Popup },
+					leaflet,
+					{ setupLeafletIcon },
+				] = await Promise.all([
+					import("react-leaflet"),
+					import("leaflet"),
+					import("@/utils/setupLeaflet"),
+				]);
+
+				// Setup leaflet icon
+				await setupLeafletIcon();
+
+				setMapComponents({
+					MapContainer,
+					TileLayer,
+					GeoJSON,
+					Marker,
+					Popup,
+					L: leaflet.default,
+				});
+				setLeafletLoaded(true);
+			} catch (error) {
+				console.error("Error loading map components:", error);
+			}
+		};
+
+		loadMapComponents();
 	}, []);
 
 	useEffect(() => {
+		if (!leafletLoaded) return;
+
 		fetch("/data/bangladesh.geojson")
 			.then((res) => res.json())
 			.then((data) => setGeoJsonData(data))
-			.catch(() => setGeoJsonData(null));
-	}, []);
+			.catch((error) => {
+				console.error("Error loading GeoJSON:", error);
+				setGeoJsonData(null);
+			});
+	}, [leafletLoaded]);
 
 	useEffect(() => {
+		if (!leafletLoaded) return;
+
 		fetch("/data/bd-divisions.json")
 			.then((res) => res.json())
 			.then((data) => setDivisions(data.divisions))
-			.catch(() => setDivisions([]));
-	}, []);
+			.catch((error) => {
+				console.error("Error loading divisions:", error);
+				setDivisions([]);
+			});
+	}, [leafletLoaded]);
 
 	const divisionStyle = {
 		fillColor: "#86efac",
@@ -81,14 +104,13 @@ const DivisionMap = ({ productData }: { productData: Product[] }) => {
 		weight: 2,
 	};
 
-	const onEachDivision = (
-		feature: Feature<Geometry, any>,
-		layer: L.Layer
-	) => {
+	const onEachDivision = (feature: Feature<Geometry, any>, layer: any) => {
+		if (!mapComponents) return;
+
 		const divisionName = feature.properties?.name;
 		const matched = divisions.find((d) => d.name === divisionName);
 
-		if (!layer || !(layer instanceof L.Path)) return;
+		if (!layer || !(layer instanceof mapComponents.L.Path)) return;
 
 		layer.on({
 			click: () => setSelectedDivision(divisionName),
@@ -115,6 +137,27 @@ const DivisionMap = ({ productData }: { productData: Product[] }) => {
 			(p) => p.division?.toLowerCase() === selectedDivision?.toLowerCase()
 		);
 	}, [selectedDivision, productData]);
+
+	// Show loading state until all components are loaded
+	if (!mapComponents || !leafletLoaded) {
+		return (
+			<div className="w-full flex flex-col lg:flex-row gap-4">
+				<div className="w-full lg:w-1/2 h-56 sm:h-[600px] flex items-center justify-center bg-gray-100 rounded-md">
+					<p className="text-center">মানচিত্র লোড হচ্ছে...</p>
+				</div>
+				<div className="w-full lg:w-1/2 max-h-[600px] border-2 border-green-400 rounded-md p-4 shadow-inner bg-white">
+					<h2 className="text-lg font-semibold mb-4 text-center">
+						দয়া করে একটি বিভাগ নির্বাচন করুন
+					</h2>
+					<p className="text-center text-gray-400 mt-6">
+						বিভাগ নির্বাচন করুন পণ্য দেখতে।
+					</p>
+				</div>
+			</div>
+		);
+	}
+
+	const { MapContainer, TileLayer, GeoJSON, Marker, Popup } = mapComponents;
 
 	return (
 		<div className="w-full flex flex-col lg:flex-row gap-4">
@@ -156,7 +199,7 @@ const DivisionMap = ({ productData }: { productData: Product[] }) => {
 				<h2 className="text-lg font-semibold mb-4 text-center">
 					{selectedDivision
 						? `এই বিভাগের পণ্যসমূহ: ${selectedDivision}`
-						: "দয়া করে একটি বিভাগ নির্বাচন করুন"}
+						: "দয়া করে একটি বিভাগ নির্বাচন করুন"}
 				</h2>
 
 				{filteredProducts.length > 0 ? (

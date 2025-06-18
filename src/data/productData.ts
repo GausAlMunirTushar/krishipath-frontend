@@ -30,8 +30,8 @@ const productData: Product[] = [
 	},
 	{
 		id: "4",
-		title: "বেগুন (Brinjal)",
-		description: "সরাসরি কৃষকের কাছ থেকে সংগ্রহ করা তাজা বেগুন।",
+		title: "গম",
+		description: "সরাসরি কৃষকের কাছ থেকে সংগ্রহ করা গম।",
 		image: "/images/products/gom.png",
 		unit: "কেজি",
 		basePrice: 28,
@@ -39,8 +39,8 @@ const productData: Product[] = [
 	},
 	{
 		id: "5",
-		title: "শসা (Cucumber)",
-		description: "শীতল ও পুষ্টিকর তাজা শসা।",
+		title: "রসুন (Spinach)",
+		description: "সরাসরি কৃষকের কাছ থেকে সংগ্রহ করা রসুন।",
 		image: "/images/products/rosun.png",
 		unit: "কেজি",
 		basePrice: 22,

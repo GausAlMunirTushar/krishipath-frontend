@@ -10,7 +10,7 @@ const Hero = () => {
 				{/* Text Content */}
 				<div className="text-center md:text-left">
 					<h1 className="text-4xl md:text-5xl font-bold text-green-800 leading-tight">
-						কৃষকের স্বপ্ন বাস্তবের পথে
+						সময় এখন কৃষকের
 					</h1>
 					<p className="mt-4 text-lg text-gray-700 max-w-xl">
 						কৃষিপথ একটি আধুনিক প্ল্যাটফর্ম যা কৃষকদের যন্ত্রপাতি

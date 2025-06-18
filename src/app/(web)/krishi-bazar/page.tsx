@@ -24,7 +24,7 @@ export default function Page() {
 			type: "বিক্রয়",
 			user: "Md Rakib",
 			image: "/images/products/onion.png",
-			price: "৩৫০",
+			price: "৫০",
 			unit: "কেজি",
 			date: "2025-05-05",
 			interested: 0,

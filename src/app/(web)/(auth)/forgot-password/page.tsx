@@ -14,7 +14,7 @@ const ForgotPasswordPage: React.FC = () => {
 	const handleSubmit = (e: React.FormEvent) => {
 		e.preventDefault();
 		// Simulate email submission success
-		setMessage("আপনার পাসওয়ার্ড রিসেট লিঙ্ক ইমেলে পাঠানো হয়েছে।");
+		setMessage("আপনার পাসওয়ার্ড রিসেট কোড ফোন  পাঠানো হয়েছে।");
 		setEmail(""); // Reset email field
 	};
 
@@ -25,8 +25,8 @@ const ForgotPasswordPage: React.FC = () => {
 					পাসওয়ার্ড ভুলে গেছেন?
 				</h2>
 				<p className="mt-2 text-center text-lg text-gray-600">
-					আপনার ইমেল এড্রেস লিখুন, এবং আমরা আপনাকে একটি পাসওয়ার্ড
-					রিসেট লিঙ্ক পাঠাবো।
+					আপনার ফোন নম্বর লিখুন, এবং আমরা আপনাকে একটি পাসওয়ার্ড রিসেট
+					লিঙ্ক পাঠাবো।
 				</p>
 
 				{/* Forgot Password Form */}
@@ -34,7 +34,7 @@ const ForgotPasswordPage: React.FC = () => {
 					<div className="rounded-md shadow-sm -space-y-px">
 						<div>
 							<label htmlFor="email" className="sr-only">
-								ইমেল
+								আপনার ফোন নম্বর লিখুন
 							</label>
 							<input
 								id="email"
@@ -44,7 +44,7 @@ const ForgotPasswordPage: React.FC = () => {
 								value={email}
 								onChange={handleEmailChange}
 								className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-green-500 focus:border-green-500 focus:z-10 sm:text-sm"
-								placeholder="ইমেল"
+								placeholder="আপনার ফোন নম্বর লিখুন"
 							/>
 						</div>
 					</div>

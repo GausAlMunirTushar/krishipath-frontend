@@ -18,7 +18,7 @@ export default function Page() {
 			unit: "কেজি",
 			date: "2025-05-26",
 			interested: 1,
-			note: "Sell post",
+			note: "আলু",
 		},
 		{
 			type: "বিক্রয়",
@@ -28,7 +28,7 @@ export default function Page() {
 			unit: "কেজি",
 			date: "2025-05-05",
 			interested: 0,
-			note: "টাইগার মুরগী",
+			note: "পেঁয়াজ",
 		},
 	];
 

@@ -34,7 +34,7 @@ const Hero = () => {
 				{/* Hero Image */}
 				<div className="relative">
 					<img
-						src="/images/farmer/hero-farmer.jpg"
+						src="/images/hero.jpg"
 						alt="Hero Farmer"
 						className="w-full max-w-md md:max-w-lg mx-auto h-80 object-cover rounded-2xl"
 					/>

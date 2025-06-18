@@ -19,10 +19,7 @@ const Footer: React.FC = () => {
 							className=""
 						/>
 					</div>
-					<p className="text-gray-400 text-sm">
-						এখানে বিভিন্ন ধরনের লোরেম ইপসাম উপলব্ধ আছে, তবে
-						বেশিরভাগই ভুক্তভোগী।
-					</p>
+					<p className="text-gray-400 text-sm">সময় এখন কৃষকের</p>
 					<div className="flex space-x-4">
 						<Link
 							href="https://facebook.com/krishipath"

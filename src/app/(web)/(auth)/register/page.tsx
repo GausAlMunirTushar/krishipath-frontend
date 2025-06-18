@@ -4,6 +4,8 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { Eye, EyeOff, ChevronDown } from "lucide-react";
 import { registerUser } from "@/services/authServices";
+import { useRouter } from "next/navigation";
+import { toast } from "react-toastify";
 
 interface Division {
 	id: string;
@@ -21,6 +23,7 @@ interface Upazila {
 }
 
 const RegisterPage: React.FC = () => {
+	const router = useRouter();
 	const [formData, setFormData] = useState({
 		name: "",
 		email: "",
@@ -106,7 +109,8 @@ const RegisterPage: React.FC = () => {
 				upazila: formData.upazila,
 			});
 
-			alert("নিবন্ধন সফল হয়েছে!");
+			toast("নিবন্ধন সফল হয়েছে!");
+			router.push("/login");
 			setFormData({
 				name: "",
 				email: "",

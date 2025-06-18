@@ -11,6 +11,7 @@ import {
 	Settings2,
 	Sparkles,
 } from "lucide-react";
+import Link from "next/link";
 
 const services = [
 	{
@@ -45,6 +46,7 @@ const extendedServices = [
 			"ঘরে বসেই ফসল বিক্রয়ের সুযোগ",
 		],
 		badge: "মূল চালিকাশক্তি",
+		href: "/krishi-bazar",
 		icon: <Store className="text-green-600 w-8 h-8" />,
 	},
 	{
@@ -55,6 +57,7 @@ const extendedServices = [
 			"ক্রয় করে পুনঃবিক্রয়",
 			"ব্যবসায়িক লেনদেনে সহায়তা",
 		],
+		href: "/stock-house",
 		icon: <Warehouse className="text-green-600 w-8 h-8" />,
 	},
 	{
@@ -64,6 +67,7 @@ const extendedServices = [
 			"ঋতু ও চাহিদার ধারা অনুযায়ী অনুমান",
 			"ঝুঁকি কমানো ও পরিকল্পনা সহায়তা",
 		],
+		href: "/ai-scan",
 		icon: <Brain className="text-green-600 w-8 h-8" />,
 	},
 	{
@@ -73,6 +77,7 @@ const extendedServices = [
 			"উপজেলা ও বিভাগভিত্তিক দাম",
 			"মোবাইল ও ওয়েব অ্যাপের মাধ্যমে সহজে দেখা যায়",
 		],
+		href: "/live-market",
 		icon: <TrendingUp className="text-green-600 w-8 h-8" />,
 	},
 	{
@@ -82,6 +87,7 @@ const extendedServices = [
 			"প্রতিনিধিদের সরাসরি সাপোর্ট",
 			"সিজনাল প্রশিক্ষণ ও পরামর্শ",
 		],
+		href: "/training-support",
 		icon: <Sparkles className="text-green-600 w-8 h-8" />,
 	},
 ];
@@ -132,9 +138,14 @@ const ServicesPage = () => {
 						>
 							<div className="flex items-center gap-3 mb-4">
 								{service.icon}
-								<h4 className="text-xl font-bold text-green-800">
-									{service.title}
-								</h4>
+								<Link
+									href={service.href}
+									className="hover:underline hover:text-green-500"
+								>
+									<h4 className="text-xl font-bold text-green-800">
+										{service.title}
+									</h4>
+								</Link>
 							</div>
 							{service.badge && (
 								<span className="inline-block bg-green-100 text-green-700 text-xs font-semibold px-2 py-1 rounded mb-3">

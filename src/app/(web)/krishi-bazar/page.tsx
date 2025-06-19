@@ -84,7 +84,12 @@ export default function Page() {
 					))}
 			</div>
 
-			<PostModal isOpen={openModal} onClose={() => setOpenModal(false)} />
+			<div className="my-2">
+				<PostModal
+					isOpen={openModal}
+					onClose={() => setOpenModal(false)}
+				/>
+			</div>
 		</main>
 	);
 }

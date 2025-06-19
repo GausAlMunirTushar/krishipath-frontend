@@ -55,15 +55,6 @@ const productData: Product[] = [
 		basePrice: 5,
 		category: "শাকসবজি",
 	},
-	{
-		id: "7",
-		title: "ধানের বীজ",
-		description: "উন্নত মানের উচ্চ ফলনশীল ধানের বীজ।",
-		image: "/images/products/gom.png",
-		unit: "কেজি",
-		basePrice: 55,
-		category: "বীজ",
-	},
 ];
 
 export default productData;

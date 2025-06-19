@@ -94,7 +94,7 @@ const extendedServices = [
 
 const ServicesPage = () => {
 	return (
-		<section className="py-10 sm:py-20 px-6 md:px-16 bg-white text-gray-800">
+		<section className="py-10 px-6 md:px-16 bg-white text-gray-800">
 			<div className="max-w-7xl mx-auto">
 				<div className="text-center mb-12">
 					<h2 className="text-4xl font-bold text-green-800 mb-4">
@@ -109,7 +109,49 @@ const ServicesPage = () => {
 					</p>
 				</div>
 
-				<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+				<div className=" grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+					{extendedServices.map((service, i) => (
+						<div
+							key={i}
+							className="bg-white border border-green-300 rounded-2xl p-6 shadow-md hover:shadow-lg transition flex flex-col justify-between"
+						>
+							<div>
+								<div className="flex items-center gap-3 mb-4">
+									{service.icon}
+									<Link
+										href={service.href}
+										className="hover:underline hover:text-green-500"
+									>
+										<h4 className="text-xl font-bold text-green-800">
+											{service.title}
+										</h4>
+									</Link>
+								</div>
+								{service.badge && (
+									<span className="inline-block bg-green-100 text-green-700 text-xs font-semibold px-2 py-1 rounded mb-3">
+										{service.badge}
+									</span>
+								)}
+								<ul className="list-disc list-inside  space-y-1 text-green-700">
+									{service.highlights.map((point, idx) => (
+										<li key={idx}>{point}</li>
+									))}
+								</ul>
+							</div>
+							{/* Action */}
+							<div className="items-end">
+								<Link
+									href={service.href}
+									className="mt-2 w-full flex items-center justify-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white text-sm py-2 rounded-md transition"
+								>
+									<CheckCircle className="w-4 h-4" />
+									বিস্তারিত দেখুন
+								</Link>
+							</div>
+						</div>
+					))}
+				</div>
+				<div className=" mt-20 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
 					{services.map((service, index) => (
 						<div
 							key={index}
@@ -126,37 +168,6 @@ const ServicesPage = () => {
 								<CheckCircle className="w-4 h-4" /> বিস্তারিত
 								জানুন
 							</div>
-						</div>
-					))}
-				</div>
-
-				<div className="mt-20 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-					{extendedServices.map((service, i) => (
-						<div
-							key={i}
-							className="bg-white border border-green-300 rounded-2xl p-6 shadow-md hover:shadow-lg transition"
-						>
-							<div className="flex items-center gap-3 mb-4">
-								{service.icon}
-								<Link
-									href={service.href}
-									className="hover:underline hover:text-green-500"
-								>
-									<h4 className="text-xl font-bold text-green-800">
-										{service.title}
-									</h4>
-								</Link>
-							</div>
-							{service.badge && (
-								<span className="inline-block bg-green-100 text-green-700 text-xs font-semibold px-2 py-1 rounded mb-3">
-									{service.badge}
-								</span>
-							)}
-							<ul className="list-disc list-inside  space-y-1 text-green-700">
-								{service.highlights.map((point, idx) => (
-									<li key={idx}>{point}</li>
-								))}
-							</ul>
 						</div>
 					))}
 				</div>
